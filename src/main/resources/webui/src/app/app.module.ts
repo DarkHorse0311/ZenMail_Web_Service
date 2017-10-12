@@ -2,6 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgModule} from '@angular/core';
 import {HttpModule} from '@angular/http';
+import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 //Third Party Modules
@@ -15,9 +16,15 @@ import {AppRoutingModule} from './app-routing.module';
 
 //Pages  -- Pages too are components, they contain other components
 import {AppComponent} from './app.component';
+import {LoginComponent} from './pages/login/login.component';
+
 
 // Services
 import {AppConfig} from './app-config';
+import {UserInfoService} from './services/user-info.service';
+import {AuthGuard} from './services/auth_guard.service';
+import {ApiRequestService} from './services/api/api-request.service';
+import {LoginService} from './services/api/login.service';
 
 
 @NgModule({
@@ -36,13 +43,20 @@ import {AppConfig} from './app-config';
 
         // Local App Modules
         AppRoutingModule
+
+
     ],
 
     declarations: [
         AppComponent,
+        LoginComponent,
     ],
 
     providers: [
+        AuthGuard,
+        UserInfoService,
+        ApiRequestService,
+        LoginService,
         AppConfig,
     ],
 
