@@ -13,10 +13,14 @@ import {ClarityModule} from 'clarity-angular';
 //Local App Modules
 import {AppRoutingModule} from './app-routing.module';
 
+// Components
+import {LogoComponent} from './components/logo/logo.component';
 
 //Pages  -- Pages too are components, they contain other components
 import {AppComponent} from './app.component';
+import {HomeComponent} from './home.component';
 import {LoginComponent} from './pages/login/login.component';
+import {LogoutComponent} from './pages/logout/logout.component';
 
 
 // Services
@@ -48,8 +52,14 @@ import {LoginService} from './services/api/login.service';
     ],
 
     declarations: [
+        // Components
+        LogoComponent,
+
+        //Pages -- Pages too are components, they contain other components
         AppComponent,
+        HomeComponent,
         LoginComponent,
+        LogoutComponent,
     ],
 
     providers: [

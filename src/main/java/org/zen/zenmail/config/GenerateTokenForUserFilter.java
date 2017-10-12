@@ -48,7 +48,7 @@ public class GenerateTokenForUserFilter extends AbstractAuthenticationProcessing
             JSONObject userJSON = new JSONObject(jsonString);
             String username = userJSON.getString("username");
             String password = userJSON.getString("password");
-            log.info("username:{} and paswword:{} \n", username, password);
+            log.info("username:{} and password:{} \n", username, password);
 
             final UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, password);
             return getAuthenticationManager().authenticate(authToken); // This will take to successfulAuthentication or faliureAuthentication function

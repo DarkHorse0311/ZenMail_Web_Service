@@ -11,6 +11,7 @@ tmp/
 
 # WebUI dependencies
 node_modules/
+dist/
 bower_components/
 
 # IDEs and editors

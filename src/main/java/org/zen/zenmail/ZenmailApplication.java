@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EntityScan(basePackages = {"org.zen.zenmail.model"})
 @EnableTransactionManagement
 public class ZenmailApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(ZenmailApplication.class, args);
+    public static void main(String[] args) throws Exception {
+        new SpringApplication(ZenmailApplication.class).run(args);
     }
 }
