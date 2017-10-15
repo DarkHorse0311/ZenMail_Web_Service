@@ -8,6 +8,7 @@ import {LogoutComponent} from './pages/logout/logout.component';
 
 import {AuthGuard} from './services/auth_guard.service';
 import {PageNotFoundComponent} from './pages/404/page-not-found.component';
+import {RegisterComponent} from './pages/register/register.component';
 
 const routes: Routes = [
     //Important: The sequence of path is important as the router go over then in sequential manner
@@ -24,8 +25,8 @@ const routes: Routes = [
     },
     {path: 'login', component: LoginComponent},
     {path: 'logout', component: LogoutComponent},
-    {path: '**', component: PageNotFoundComponent}
-
+    {path: 'register', component: RegisterComponent},
+    {path: '**', component: PageNotFoundComponent},
 ];
 
 @NgModule({

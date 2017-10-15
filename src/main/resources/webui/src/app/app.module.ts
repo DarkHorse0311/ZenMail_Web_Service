@@ -10,8 +10,16 @@ import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {ClarityModule} from 'clarity-angular';
 
+import { CovalentLayoutModule, CovalentStepsModule /*, any other modules */ } from '@covalent/core';
+// (optional) Additional Covalent Modules imports
+import { CovalentHttpModule } from '@covalent/http';
+import { CovalentHighlightModule } from '@covalent/highlight';
+import { CovalentMarkdownModule } from '@covalent/markdown';
+import { CovalentDynamicFormsModule } from '@covalent/dynamic-forms';
+
 //Local App Modules
 import {AppRoutingModule} from './app-routing.module';
+import { SharedModule } from './shared/shared.module';
 
 // Components
 import {LogoComponent} from './components/logo/logo.component';
@@ -21,6 +29,7 @@ import {AppComponent} from './app.component';
 import {HomeComponent} from './home.component';
 import {LoginComponent} from './pages/login/login.component';
 import {LogoutComponent} from './pages/logout/logout.component';
+import {RegisterComponent} from './pages/register/register.component';
 
 
 // Services
@@ -45,10 +54,12 @@ import {LoginService} from './services/api/login.service';
         NgxChartsModule,
         ClarityModule.forChild(),
 
+        CovalentLayoutModule,
+        CovalentStepsModule,
+
         // Local App Modules
-        AppRoutingModule
-
-
+        AppRoutingModule,
+        SharedModule
     ],
 
     declarations: [
@@ -60,6 +71,7 @@ import {LoginService} from './services/api/login.service';
         HomeComponent,
         LoginComponent,
         LogoutComponent,
+            RegisterComponent
     ],
 
     providers: [
