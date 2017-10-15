@@ -1,0 +1,36 @@
+# Java Builds
+target/
+build/
+bin/
+.gradle/
+.mvn/
+.classpath
+
+# WebUI Builds
+tmp/
+
+# WebUI dependencies
+node_modules/
+dist/
+bower_components/
+
+# IDEs and editors
+**/.idea
+**/.vscode
+.settings/
+
+# misc
+**/.sass-cache
+**/npm-debug.log
+typings/
+mvnw
+mvnw.cmd
+zenmail.iml
+
+#System Files
+**/.DS_Store
+**/.project
+**/.settings
+**/.classpath
+**/.metadata
+**/Thumbs.db
