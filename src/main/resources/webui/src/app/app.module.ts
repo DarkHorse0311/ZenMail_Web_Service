@@ -8,7 +8,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 //Third Party Modules
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
-import {ClarityModule} from 'clarity-angular';
 
 import { CovalentLayoutModule, CovalentStepsModule /*, any other modules */ } from '@covalent/core';
 // (optional) Additional Covalent Modules imports
@@ -52,7 +51,6 @@ import {LoginService} from './services/api/login.service';
         // Thirdparty Module
         NgxDatatableModule,
         NgxChartsModule,
-        ClarityModule.forChild(),
 
         CovalentLayoutModule,
         CovalentStepsModule,

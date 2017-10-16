@@ -1,7 +1,8 @@
 <div layout="column" layout-fill>
-    <md-toolbar color="primary" class="md-whiteframe-z1">
+    <md-toolbar color="primary" class="md-whiteframe-z5">
         <md-icon class="md-icon-logo" svgIcon="assets:rsa"></md-icon>
-        <span>Auth</span>
+        <span flex>Auth</span>
+        <a md-icon-button mdTooltip="Github" href="https://github.com/ProjectZenMail/zenmail" target="_blank"><md-icon svgIcon="assets:github"></md-icon></a>
     </md-toolbar>
     <div class="md-content" layout-padding flex>
         <div layout-gt-xs="row" layout-align-gt-xs="center center" class="margin">
@@ -19,12 +20,10 @@
                                     <input mdInput #nameElement #nameControl="ngModel" placeholder="Full name"
                                            type="text" maxlength="30"
                                            name="username" [(ngModel)]="model.name" required>
-                                    <span md-prefix><md-icon>person</md-icon></span>
                                     <md-hint align="start">
                     <span [hidden]="!nameControl.errors?.required || nameControl.pristine"
                           class="tc-red-600">Required</span>
                                     </md-hint>
-                                    <md-hint align="end">{{nameElement.value.length}} / 30</md-hint>
                                 </md-input-container>
                             </div>
 
@@ -33,12 +32,10 @@
                                     <input mdInput #mailElement #mailControl="ngModel" placeholder="Email address"
                                            type="text" maxlength="30"
                                            name="email" [(ngModel)]="model.email" required>
-                                    <span md-prefix><md-icon>email</md-icon></span>
                                     <md-hint align="start">
                     <span [hidden]="!mailControl.errors?.required || mailControl.pristine"
                           class="tc-red-600">Required</span>
                                     </md-hint>
-                                    <md-hint align="end">{{mailElement.value.length}} / 30</md-hint>
                                 </md-input-container>
                             </div>
 
@@ -47,7 +44,6 @@
                                     <input mdInput #passElement #passControl="ngModel" placeholder="Password"
                                            type="password"
                                            name="password" [(ngModel)]="model.password" required>
-                                    <span md-prefix><md-icon>lock</md-icon></span>
                                     <md-hint align="start">
                     <span [hidden]="!passControl.errors?.required || passControl.pristine"
                           class="tc-red-600">Required</span>
@@ -59,8 +55,7 @@
                                 <md-input-container flex>
                                     <input mdInput #passconfElement #passconfControl="ngModel" placeholder="Confirm Password"
                                            type="password"
-                                           name="password" [(ngModel)]="model.passconf" required>
-                                    <span md-prefix><md-icon>lock</md-icon></span>
+                                           name="passconf" [(ngModel)]="model.passconf" required>
                                     <md-hint align="start">
                     <span [hidden]="!passconfControl.errors?.required || passconfControl.pristine"
                           class="tc-red-600">Required</span>
