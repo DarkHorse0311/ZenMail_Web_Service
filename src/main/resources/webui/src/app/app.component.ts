@@ -16,5 +16,7 @@ export class AppComponent {
             this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/covalent.svg'));
         this._iconRegistry.addSvgIconInNamespace('assets', 'rsa',
             this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/rsa.svg'));
+        this._iconRegistry.addSvgIconInNamespace('assets', 'github',
+            this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/github.svg'));
     }
 }
