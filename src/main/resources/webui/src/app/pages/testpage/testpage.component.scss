@@ -1,0 +1,17 @@
+@import "../../../theme";
+body, html {
+  overflow: hidden;
+}
+.sidepanel {
+  background-color: mat-color($primary);
+
+  flex-direction: column;
+}
+
+.md-icon-logo {
+  margin-right: 0;
+  [dir='rtl'] & {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

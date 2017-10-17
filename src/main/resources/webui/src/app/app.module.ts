@@ -9,16 +9,16 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 
-import { CovalentLayoutModule, CovalentStepsModule /*, any other modules */ } from '@covalent/core';
+import {CovalentLayoutModule, CovalentStepsModule /*, any other modules */} from '@covalent/core';
 // (optional) Additional Covalent Modules imports
-import { CovalentHttpModule } from '@covalent/http';
-import { CovalentHighlightModule } from '@covalent/highlight';
-import { CovalentMarkdownModule } from '@covalent/markdown';
-import { CovalentDynamicFormsModule } from '@covalent/dynamic-forms';
+import {CovalentHttpModule} from '@covalent/http';
+import {CovalentHighlightModule} from '@covalent/highlight';
+import {CovalentMarkdownModule} from '@covalent/markdown';
+import {CovalentDynamicFormsModule} from '@covalent/dynamic-forms';
 
 //Local App Modules
 import {AppRoutingModule} from './app-routing.module';
-import { SharedModule } from './shared/shared.module';
+import {SharedModule} from './shared/shared.module';
 
 // Components
 import {LogoComponent} from './components/logo/logo.component';
@@ -30,6 +30,7 @@ import {LoginComponent} from './pages/login/login.component';
 import {LogoutComponent} from './pages/logout/logout.component';
 import {RegisterComponent} from './pages/register/register.component';
 
+import {TestpageComponent} from './pages/testpage/testpage.component';
 
 // Services
 import {AppConfig} from './app-config';
@@ -37,6 +38,23 @@ import {UserInfoService} from './services/user-info.service';
 import {AuthGuard} from './services/auth_guard.service';
 import {ApiRequestService} from './services/api/api-request.service';
 import {LoginService} from './services/api/login.service';
+
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {CommonModule} from '@angular/common';
+import {MdCardModule} from '@angular/material';
+import {MdMenuModule} from '@angular/material';
+import {MdInputModule} from '@angular/material';
+import {MdButtonModule} from '@angular/material';
+import {MdListModule} from '@angular/material';
+import {MdIconModule} from '@angular/material';
+import {MdSidenavModule} from '@angular/material';
+import {MdToolbarModule} from '@angular/material';
+import {MdTooltipModule} from '@angular/material';
+import {MdDialogModule} from '@angular/material';
+import {CovalentMediaModule} from '@covalent/core';
+import {CovalentSearchModule} from '@covalent/core';
+import {CovalentMenuModule} from '@covalent/core';
+import {CovalentNotificationsModule} from '@covalent/core';
 
 
 @NgModule({
@@ -57,7 +75,25 @@ import {LoginService} from './services/api/login.service';
 
         // Local App Modules
         AppRoutingModule,
-        SharedModule
+        SharedModule,
+
+        CommonModule,
+        MdCardModule,
+        MdMenuModule,
+        MdInputModule,
+        MdButtonModule,
+        MdListModule,
+        MdIconModule,
+        MdSidenavModule,
+        MdToolbarModule,
+        MdTooltipModule,
+        MdDialogModule,
+        CovalentLayoutModule,
+        CovalentMediaModule,
+        CovalentSearchModule,
+        CovalentMenuModule,
+        CovalentNotificationsModule,
+        CovalentHttpModule.forRoot(),
     ],
 
     declarations: [
@@ -69,7 +105,8 @@ import {LoginService} from './services/api/login.service';
         HomeComponent,
         LoginComponent,
         LogoutComponent,
-            RegisterComponent
+        RegisterComponent,
+        TestpageComponent
     ],
 
     providers: [
