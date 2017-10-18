@@ -11,6 +11,7 @@ import {ApiRequestService} from './api-request.service';
 export interface RegisterServiceParams {
     username: string;
     password: string;
+    email: string;
 }
 
 @Injectable()
@@ -26,7 +27,7 @@ export class RegisterService {
 
 
     // noinspection JSAnnotator
-    register(username: string, email: string, password: string) : boolean{
+    register(username: string, email: string, password: string): boolean {
         let me = this;
 
         let bodyData: RegisterServiceParams = {
@@ -53,23 +54,23 @@ export class RegisterService {
                             "token": jsonResp.item.token,
                         }
                         /**/
-                    };
-
-                    // store username and jwt token in session storage to keep user logged in between page refreshes
-                    //this.userInfoService.storeUserInfo(JSON.stringify(loginInfoReturn.user));
                 }
-                //loginDataSubject.next(loginInfoReturn);
-                return true;
-            };
-            /*error2 => {
-                loginInfoReturn = {
-                    "success": false,
-                    "message": error2.status,
-                    "landingPage": "/login"
-                };
-                loginDataSubject.next(loginInfoReturn);
-            });
-            */
+                ;
 
+                // store username and jwt token in session storage to keep user logged in between page refreshes
+                //this.userInfoService.storeUserInfo(JSON.stringify(loginInfoReturn.user));
+            },
+        //loginDataSubject.next(loginInfoReturn);
+        return true;
+    };
 
+    /*error2 => {
+        loginInfoReturn = {
+            "success": false,
+            "message": error2.status,
+            "landingPage": "/login"
+        };
+        loginDataSubject.next(loginInfoReturn);
+    });
+    */
 }

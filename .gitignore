@@ -34,3 +34,5 @@ zenmail.iml
 **/.classpath
 **/.metadata
 **/Thumbs.db
+/..gitignore.swp
+/.gitignore
