@@ -2,10 +2,11 @@ import {Injectable, Inject} from '@angular/core';
 import {Http, Headers, Response, RequestOptions} from '@angular/http';
 import {Router} from '@angular/router';
 
+
 import {Observable, Subject} from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import {UserInfoService, LoginInfoInStorage} from '../user-info.service';
+import {UserInfoService, LoginInfoInStorage, RegisterInfoStorage} from '../user-info.service';
 import {ApiRequestService} from './api-request.service';
 
 export interface RegisterServiceParams {
@@ -25,26 +26,38 @@ export class RegisterService {
     }
 
     // noinspection JSAnnotator
-    register(userId: string, email: string, password: string): boolean {
+    register(userId: string, email: string, password: string): Observable<any> {
         let me = this;
         let bodyData: RegisterServiceParams = {
             "userId": userId,
             "email": email,
             "password": password,
         };
-        let success = false;
+        let registerDataSubject: Subject<any> = new Subject<any>(); // Will use this subject to emit data that we want after ajax login attempt
+        let registerInfoReturn: RegisterInfoStorage; // Object that we want to send back to Login Page
+
         this.apiRequest.post('user', bodyData)
             .subscribe(jsonResp => {
                 console.log(jsonResp);
                 if (jsonResp !== undefined && jsonResp !== null && jsonResp.operationStatus === "SUCCESS") {
-                    success = true;
+                    registerInfoReturn = {
+                        "success": true,
+                        "message": jsonResp.operationMessage,
+                        "landingPage":this.landingPage,
+                    }
                 }
+                registerDataSubject.next(registerInfoReturn);
                 // store username and jwt token in session storage to keep user logged in between page refreshes
                 //this.userInfoService.storeUserInfo(JSON.stringify(loginInfoReturn.user));
             }, error2 => {
+                registerInfoReturn = {
+                    "success": false,
+                    "message": error2.status,
+                    "landingPage":"/register",
+                };
+                registerDataSubject.next(registerInfoReturn);
             });
-        console.log(success);
-        return success;
+        return registerDataSubject;
     }
 
     //loginDataSubject.next(loginInfoReturn);
