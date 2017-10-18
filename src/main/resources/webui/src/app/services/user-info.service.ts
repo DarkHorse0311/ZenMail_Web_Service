@@ -14,6 +14,12 @@ export interface LoginInfoInStorage {
     user?: UserInStorage;
 }
 
+export interface RegisterInfoStorage{
+    success: boolean;
+    message: string;
+    landingPage: string;
+}
+
 @Injectable()
 export class UserInfoService {
 
