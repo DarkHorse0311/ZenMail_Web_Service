@@ -15,19 +15,18 @@ export class RegisterComponent implements OnInit {
 
     constructor(private router: Router,
                 private registerService: RegisterService,
-                private loginService:LoginService
-                ) {
+                private loginService: LoginService) {
     }
 
     ngOnInit() {
     }
 
     register() {
-        if(!this.validatePassword()){
+        if (!this.validatePassword()) {
             this.errMsg = 'passwords does not match';
             return;
         }
-        if(!this.validateTermsAgreeCheckBox()){
+        if (!this.validateTermsAgreeCheckBox()) {
             this.errMsg = 'you don not agree with terms';
             return;
         }
@@ -60,7 +59,7 @@ export class RegisterComponent implements OnInit {
                         this.ngOnInit();
                     } else {
                         console.log('Going to landing page - ' + resp.landingPage);
-                        this.loginRegisteredUser(this.model.name,this.model.password);
+                        this.loginRegisteredUser(this.model.name, this.model.password);
                     }
                 }
             );
@@ -73,14 +72,14 @@ export class RegisterComponent implements OnInit {
         return true;
     }
 
-    validateTermsAgreeCheckBox() :boolean{
-        if(!this.model){
+    validateTermsAgreeCheckBox(): boolean {
+        if (!this.model) {
             return false;
         }
         return true;
     }
 
-    loginRegisteredUser(userName:string,password:string){
+    loginRegisteredUser(userName: string, password: string) {
         this.loginService.getToken(userName, password)
             .subscribe(resp => {
                     if (resp.user === undefined || resp.user.token === undefined || resp.user.token === "INVALID") {

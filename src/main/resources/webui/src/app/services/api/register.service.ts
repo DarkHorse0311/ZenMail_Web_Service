@@ -43,7 +43,7 @@ export class RegisterService {
                     registerInfoReturn = {
                         "success": true,
                         "message": jsonResp.operationMessage,
-                        "landingPage":this.landingPage,
+                        "landingPage": this.landingPage,
                     }
                 }
                 registerDataSubject.next(registerInfoReturn);
@@ -53,7 +53,7 @@ export class RegisterService {
                 registerInfoReturn = {
                     "success": false,
                     "message": error2.status,
-                    "landingPage":"/register",
+                    "landingPage": "/register",
                 };
                 registerDataSubject.next(registerInfoReturn);
             });
