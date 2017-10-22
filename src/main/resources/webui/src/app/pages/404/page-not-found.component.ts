@@ -11,5 +11,4 @@ export class PageNotFoundComponent {
     constructor(private router: Router, private activatedRoute: ActivatedRoute) {
         console.log("404 : %s", router.url)
     }
-
 }

@@ -39,7 +39,7 @@ $mat-light-theme-background: (
         disabled-button-toggle: map_get($mat-grey, 200),
 );
 
-$primary: mat-palette($mat-blue-grey, 800);
+$primary: mat-palette($mat-blue-grey, A700);
 $accent: mat-palette($mat-deep-orange, 700);
 $warn: mat-palette($mat-red, 500);
 

@@ -29,8 +29,8 @@ import {HomeComponent} from './home.component';
 import {LoginComponent} from './pages/login/login.component';
 import {LogoutComponent} from './pages/logout/logout.component';
 import {RegisterComponent} from './pages/register/register.component';
-
 import {TestpageComponent} from './pages/testpage/testpage.component';
+import {MessageComponent} from './pages/message/message.component';
 
 // Services
 import {AppConfig} from './app-config';
@@ -105,8 +105,9 @@ import {CovalentNotificationsModule} from '@covalent/core';
         HomeComponent,
         LoginComponent,
         LogoutComponent,
+        TestpageComponent,
         RegisterComponent,
-        TestpageComponent
+        MessageComponent
     ],
 
     providers: [

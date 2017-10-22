@@ -4,9 +4,13 @@ body, html {
 }
 .sidepanel {
   background-color: mat-color($primary);
-
   flex-direction: column;
+  .buttons {
+    margin-top: 22px;
+    margin-bottom: 22px;
+  }
 }
+
 
 .md-icon-logo {
   margin-right: 0;
