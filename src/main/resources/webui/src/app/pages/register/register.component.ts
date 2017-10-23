@@ -30,6 +30,10 @@ export class RegisterComponent implements OnInit {
             this.errMsg = 'you don not agree with terms';
             return;
         }
+        if(!this.validateId()){
+            this.errMsg = 'Unacceptable symbols in name';
+            return;
+        }
 
 
         this.registerService.register(this.model.name, this.model.email, this.model.password)
@@ -63,6 +67,14 @@ export class RegisterComponent implements OnInit {
                     }
                 }
             );
+    }
+
+    validateId() : boolean{
+        var str = this.model.name;
+        if(/^[a-zA-Z0-9- ]*$/.test(str) == false) {
+            return false;
+        }
+        return true;
     }
 
     validatePassword(): boolean {
