@@ -38,6 +38,7 @@ import {UserInfoService} from './services/user-info.service';
 import {AuthGuard} from './services/auth_guard.service';
 import {ApiRequestService} from './services/api/api-request.service';
 import {LoginService} from './services/api/login.service';
+import {RegisterService} from "./services/api/register.service";
 
 
 @NgModule({
@@ -79,6 +80,7 @@ import {LoginService} from './services/api/login.service';
         UserInfoService,
         ApiRequestService,
         LoginService,
+        RegisterService,
         AppConfig,
     ],
 
