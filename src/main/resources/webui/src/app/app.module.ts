@@ -30,7 +30,8 @@ import {LoginComponent} from './pages/login/login.component';
 import {LogoutComponent} from './pages/logout/logout.component';
 import {RegisterComponent} from './pages/register/register.component';
 import {TestpageComponent} from './pages/testpage/testpage.component';
-import {MessageComponent} from './pages/message/message.component';
+import {NewMessageComponent} from './pages/new_message/new_message.component';
+import { InboxComponent } from './pages/inbox/inbox.component';
 
 // Services
 import {AppConfig} from './app-config';
@@ -55,6 +56,7 @@ import {CovalentMediaModule} from '@covalent/core';
 import {CovalentSearchModule} from '@covalent/core';
 import {CovalentMenuModule} from '@covalent/core';
 import {CovalentNotificationsModule} from '@covalent/core';
+import { MessageComponent } from './pages/message/message.component';
 
 
 @NgModule({
@@ -107,6 +109,8 @@ import {CovalentNotificationsModule} from '@covalent/core';
         LogoutComponent,
         TestpageComponent,
         RegisterComponent,
+        NewMessageComponent,
+        InboxComponent,
         MessageComponent
     ],
 

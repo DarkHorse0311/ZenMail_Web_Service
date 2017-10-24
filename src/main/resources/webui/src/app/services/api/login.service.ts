@@ -16,7 +16,7 @@ export interface LoginRequestParam {
 @Injectable()
 export class LoginService {
 
-    public landingPage: string = "/test";
+    public landingPage: string = "/home";
 
     constructor(private router: Router,
                 private http: Http,

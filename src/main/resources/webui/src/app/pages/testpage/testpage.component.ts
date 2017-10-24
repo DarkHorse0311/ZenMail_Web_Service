@@ -3,7 +3,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {MdDialogRef, MdIconRegistry} from '@angular/material';
 import {TdMediaService} from '@covalent/core';
 import {MdDialog} from '@angular/material';
-import {MessageComponent} from "../message/message.component";
+import {NewMessageComponent} from "../new_message/new_message.component";
 import {LoginComponent} from "../login/login.component";
 
 @Component({
@@ -22,27 +22,27 @@ export class TestpageComponent implements AfterViewInit {
     routes: Object[] = [
         {
             title: 'Inbox',
-            route: '/',
+            route: '/home/inbox',
             icon: 'email',
         }, {
             title: 'Sent',
-            route: '/',
+            route: '/home',
             icon: 'send',
         }, {
             title: 'Starred',
-            route: '/',
+            route: '/home',
             icon: 'star'
         }, {
             title: 'Drafts',
-            route: '/',
+            route: '/home',
             icon: 'drafts',
         }, {
             title: 'Trash',
-            route: '/',
+            route: '/home',
             icon: 'delete',
         },  {
             title: 'Spam',
-            route: '/',
+            route: '/home',
             icon: 'block',
         }
     ];
@@ -68,7 +68,7 @@ export class TestpageComponent implements AfterViewInit {
     }
 
     composeMail(): void {
-        const dialogRef = this.dialog.open(MessageComponent, {
+        const dialogRef = this.dialog.open(NewMessageComponent, {
             height: '70%',
             width: '70%'
         });

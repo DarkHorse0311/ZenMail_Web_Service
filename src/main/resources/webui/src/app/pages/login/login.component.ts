@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
                         return;
                     }
                     if (!resp.success) {
-                        console.log('switching message #' + resp.message);
+                        console.log('switching new_message #' + resp.message);
                         switch (resp.message) {
                             case 401:
                                 this.errMsg = 'Username or password is incorrect';

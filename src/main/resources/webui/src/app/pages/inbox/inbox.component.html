@@ -1,0 +1,32 @@
+<md-card tdMediaToggle="gt-xs" [mediaClasses]="['push']">
+    <md-card-header>
+        <div>
+            <md-checkbox color="primary" mdTooltip="Select messages"
+                         class="checkbox pad-right-xs"></md-checkbox>
+            <button md-icon-button>
+                <md-icon class="tc-grey-700" mdTooltip="Mark as read">remove_red_eye</md-icon>
+            </button>
+            <button md-icon-button>
+                <md-icon class="tc-grey-700" mdTooltip="To trash">delete</md-icon>
+            </button>
+            <button md-icon-button>
+                <md-icon class="tc-grey-700" mdTooltip="To spam">block</md-icon>
+            </button>
+        </div>
+    </md-card-header>
+    <md-divider></md-divider>
+    <md-nav-list dense layout-fill flex>
+
+        <ng-template let-item let-last="last" ngFor [ngForOf]="messages">
+            <md-list-item>
+                <md-checkbox color="primary" class="checkbox pad-right-xs"></md-checkbox>
+                <md-icon class="tc-grey-500 pad-right-sm">star_border</md-icon>
+                <a [routerLink]="'/home/message'" flex layout="row">
+                    <span align="start" flex="20">{{item.sender}}</span>
+                    <span class="md-caption">{{item.title}}<span class="tc-grey-600"> — {{item.body}}</span></span>
+                    <span class="md-caption" flex align="end">{{item.date}}</span>
+                </a>
+            </md-list-item>
+        </ng-template>
+    </md-nav-list>
+</md-card>
