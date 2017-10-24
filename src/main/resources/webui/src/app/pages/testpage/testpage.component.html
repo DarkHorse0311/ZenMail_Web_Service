@@ -3,9 +3,11 @@
                     [opened]="media.registerQuery('gt-xs') | async"
                     [mode]="(media.registerQuery('gt-xs') | async) ? 'side' : 'push'"
                     [sidenavWidth]="(media.registerQuery('gt-xs') | async) ? '200px' : '100%'">
+
     <div td-sidenav-toolbar-content layout="row" layout-align="center center" flex>
         <span flex></span>
-        <md-icon layout="center" class="md-icon-logo cursor-pointer" svgIcon="assets:rsa"></md-icon>
+        <!--<md-icon layout="center" class="md-icon-logo cursor-pointer" svgIcon="assets:rsa"></md-icon>-->
+        <span class="logo-font">ZenMail</span>
         <span flex></span>
     </div>
     <div td-toolbar-content layout="row" layout-align="start center" flex>
@@ -67,7 +69,10 @@
                 </a>
             </td-menu>
         </md-menu>
-        <button md-button class="md-subhead" mdTooltip="User menu" [mdMenuTriggerFor]="toolbarMenu1">Admin</button>
+        <button md-icon-button mdTooltip="Menu" [mdMenuTriggerFor]="toolbarMenu1">
+            <img md-card-avatar
+                 src="http://www.tania-soleil.com/wp-content/uploads/2017/09/Herman_Hesse.jpg"/>
+        </button>
         <md-menu #toolbarMenu1="mdMenu">
             <td-menu>
                 <md-nav-list dense>
@@ -90,23 +95,52 @@
     </div>
     <md-nav-list layout-fill flex class="sidepanel" td-sidenav-content
                  (click)="!media.query('gt-sm') && navList.close()">
-        <div layout="row" class="buttons">
+        <div layout="row">
             <span flex></span>
-            <button flex="70" align="center" md-raised-button color="accent" class="text-upper" (click)="composeMail()">
+            <button flex="70" align="center" md-raised-button color="accent" class="text-upper buttons"
+                    (click)="composeMail()">
                 Compose
             </button>
             <span flex></span>
         </div>
 
         <ng-template let-item let-last="last" ngFor [ngForOf]="routes">
-            <a md-list-item class="tc-blue-grey-50" (click)="layout.close()">
-                <md-icon class="tc-blue-grey-50">{{item.icon}}</md-icon>
+            <a md-list-item class="tc-grey-700" (click)="layout.close()">
+                <md-icon class="tc-grey-700">{{item.icon}}</md-icon>
                 {{item.title}}</a>
         </ng-template>
     </md-nav-list>
 
     <md-card tdMediaToggle="gt-xs" [mediaClasses]="['push']">
-        <md-card-title>Ulysses is useless</md-card-title>
+        <md-card-header>
+            <div>
+                <button md-icon-button>
+                    <md-icon class="tc-grey-700" mdTooltip="Go back">arrow_back</md-icon>
+                </button>
+                <button md-icon-button>
+                    <md-icon class="tc-grey-700" mdTooltip="Mark as read">remove_red_eye</md-icon>
+                </button>
+                <button md-icon-button>
+                    <md-icon class="tc-grey-700" mdTooltip="To trash">delete</md-icon>
+                </button>
+                <button md-icon-button>
+                    <md-icon class="tc-grey-700" mdTooltip="To spam">block</md-icon>
+                </button>
+            </div>
+        </md-card-header>
+        <md-divider></md-divider>
+        <md-card-header>
+            <div layout="row" flex>
+                <div class="md-headline pad-top pad-bottom">Ulysses is useless</div>
+                <span flex></span>
+                <div class="pad-top pad-right">
+                    <button md-icon-button>
+                        <md-icon class="tc-grey-700" mdTooltip="Favourite">star_border</md-icon>
+                    </button>
+                </div>
+            </div>
+        </md-card-header>
+        <md-divider></md-divider>
         <md-card-header>
             <img md-card-avatar
                  src="http://cdn8.openculture.com/wp-content/uploads/2013/09/James_Joyce_by_Alex_Ehrenzweig_1915_restored.jpg"/>
@@ -115,17 +149,18 @@
             <span flex></span>
             <div class="pad-top pad-right">
                 <button md-icon-button>
-                    <md-icon>reply</md-icon>
+                    <md-icon class="tc-grey-700" mdTooltip="Reply">reply</md-icon>
                 </button>
                 <button md-icon-button>
-                    <md-icon>forward</md-icon>
+                    <md-icon class="tc-grey-700" mdTooltip="Forward">forward</md-icon>
                 </button>
                 <button md-icon-button>
-                    <md-icon>more_vert</md-icon>
+                    <md-icon class="tc-grey-700" mdTooltip="More">more_vert</md-icon>
                 </button>
             </div>
         </md-card-header>
         <md-divider></md-divider>
+
         <div class="md-padding">
             <p>
                 Halted, he peered down the dark winding stairs and called up coarsely:</p>
@@ -178,21 +213,6 @@
 
             <p> – My name is absurd too: Malachi Mulligan, two dactyls. But it has a Hellenic ring, hasn’t it? Tripping
                 and sunny like the buck himself. We must go to Athens.</p>
-        </div>
-        <md-divider></md-divider>
-        <div layout="row" layout-align="space-around center" class="pad">
-            <button md-button class="tc-grey-600">
-                <md-icon class="pull-bottom">reply</md-icon>
-                <div class="md-caption">Reply</div>
-            </button>
-            <button md-button class="tc-grey-600">
-                <md-icon class="pull-bottom">reply_all</md-icon>
-                <div class="md-caption">Reply All</div>
-            </button>
-            <button md-button class="tc-grey-600">
-                <md-icon class="pull-bottom">forward</md-icon>
-                <div class="md-caption">Forward</div>
-            </button>
         </div>
     </md-card>
 </td-layout-nav-list>

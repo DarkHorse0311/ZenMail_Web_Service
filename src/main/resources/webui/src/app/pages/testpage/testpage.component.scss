@@ -2,15 +2,17 @@
 body, html {
   overflow: hidden;
 }
+
 .sidepanel {
-  background-color: mat-color($primary);
+  background-color: #dbe0e6;
   flex-direction: column;
+
   .buttons {
     margin-top: 22px;
     margin-bottom: 22px;
+    font-weight: bold;
   }
 }
-
 
 .md-icon-logo {
   margin-right: 0;

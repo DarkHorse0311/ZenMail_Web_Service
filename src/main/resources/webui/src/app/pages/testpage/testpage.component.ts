@@ -1,7 +1,7 @@
 import {Component, AfterViewInit, ChangeDetectorRef} from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import {DomSanitizer} from '@angular/platform-browser';
 import {MdDialogRef, MdIconRegistry} from '@angular/material';
-import { TdMediaService } from '@covalent/core';
+import {TdMediaService} from '@covalent/core';
 import {MdDialog} from '@angular/material';
 import {MessageComponent} from "../message/message.component";
 import {LoginComponent} from "../login/login.component";
@@ -25,18 +25,26 @@ export class TestpageComponent implements AfterViewInit {
             route: '/',
             icon: 'email',
         }, {
-            title: 'Drafts',
-            route: '/',
-            icon: 'drafts',
-        }, {
             title: 'Sent',
             route: '/',
             icon: 'send',
         }, {
+            title: 'Starred',
+            route: '/',
+            icon: 'star'
+        }, {
+            title: 'Drafts',
+            route: '/',
+            icon: 'drafts',
+        }, {
             title: 'Trash',
             route: '/',
             icon: 'delete',
-        },
+        },  {
+            title: 'Spam',
+            route: '/',
+            icon: 'block',
+        }
     ];
 
 
