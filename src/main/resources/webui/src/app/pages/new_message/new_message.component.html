@@ -1,25 +1,56 @@
-<h2 md-dialog-title>Install Angular</h2>
-<md-dialog-content>
-    <h3>DEVELOP ACROSS ALL PLATFORMS</h3>
-    <p>Learn one way to build applications with Angular and reuse your code and abilities to build
-        apps for any deployment target. For web, mobile web, native mobile and native desktop.</p>
+<!DOCTYPE html>
+<form #messageForm="ngForm">
+    <md-dialog-content>
+        <td-layout-nav class="reverse-pad-top">
+            <div td-toolbar-content layout="row" layout-align="center center" flex>
 
-    <h3>SPEED & PERFORMANCE</h3>
-    <p>Achieve the maximum speed possible on the Web Platform today, and take it further, via Web
-        Workers and server-side rendering. Angular puts you in control over scalability. Meet huge data requirements
-        by building data models on RxJS, Immutable.js or another push-model.</p>
+                <button *ngIf="!isFullscreen" md-icon-button class="td-menu-button"
+                        (click)="fullscreen()" mdTooltip="Fullscreen">
+                    <md-icon>fullscreen</md-icon>
+                </button>
 
-    <h3>INCREDIBLE TOOLING</h3>
-    <p>Build features quickly with simple, declarative templates. Extend the template language with your own
-        components and use a wide array of existing components. Get immediate Angular-specific help and feedback
-        with nearly every IDE and editor. All this comes together so you can focus on building amazing apps rather
-        than trying to make the code work.</p>
+                <button *ngIf="isFullscreen" md-icon-button class="td-menu-button"
+                        (click)="exitFullscreen()" mdTooltip="Exit fullscreen">
+                    <md-icon>fullscreen_exit</md-icon>
+                </button>
 
-    <h3>LOVED BY MILLIONS</h3>
-    <p>From prototype through global deployment, Angular delivers the productivity and scalable infrastructure
-        that supports Google's largest applications.</p>
-</md-dialog-content>
-<md-dialog-actions>
-    <button md-button [md-dialog-close]="true" tabindex="1">Install</button>
-    <button md-button md-dialog-close tabindex="-1">Cancel</button>
-</md-dialog-actions>
+                <md-icon>person</md-icon>
+                <span md-line>Andrew Shipilo [admin@zenmail.space]</span>
+
+                <span flex></span>
+                <button md-icon-button mdTooltip="Send">
+                    <md-icon>send</md-icon>
+                </button>
+                <button md-icon-button mdTooltip="Save">
+                    <md-icon>save</md-icon>
+                </button>
+                <button md-icon-button md-dialog-close mdTooltip="Close">
+                    <md-icon>close</md-icon>
+                </button>
+            </div>
+        </td-layout-nav>
+    </md-dialog-content>
+
+    <md-dialog-content>
+        <div class="pad-top " layout="row" flex>
+            <span flex></span>
+            <md-input-container flex="95">
+                <input mdInput placeholder="Add recipient"
+                       type="text"
+                       name="username" required>
+            </md-input-container>
+            <span flex></span>
+        </div>
+        <div class="pad-bottom" layout="row" flex>
+            <span flex></span>
+            <md-input-container flex="95">
+                <span flex></span>
+                <input mdInput placeholder="Subject"
+                       type="text"
+                       name="password" required>
+            </md-input-container>
+            <span flex></span>
+        </div>
+        <td-text-editor #textEditor></td-text-editor>
+    </md-dialog-content>
+</form>

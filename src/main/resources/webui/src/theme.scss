@@ -122,7 +122,6 @@ $theme: mat-light-theme($primary, $accent, $warn);
 @include covalent-theme($theme);
 @include covalent-markdown-theme($theme);
 @include covalent-highlight-theme();
-
 // Active icon color in list nav
 md-nav-list {
   [md-list-item].active {
@@ -178,4 +177,12 @@ ngx-charts-line-chart {
       stroke-width: 2;
     }
   }
+}
+
+.mat-dialog-container {
+  overflow: hidden !important;
+  border-radius: 5px !important;
+  padding: 0 !important;
+  margin: auto !important;
+  max-width: none !important;
 }

@@ -1,6 +1,6 @@
 import {Component, AfterViewInit, ChangeDetectorRef} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MdDialogRef, MdIconRegistry} from '@angular/material';
+import {DialogPosition, MdDialogRef, MdIconRegistry} from '@angular/material';
 import {TdMediaService} from '@covalent/core';
 import {MdDialog} from '@angular/material';
 import {NewMessageComponent} from "../new_message/new_message.component";
@@ -18,6 +18,7 @@ export class TestpageComponent implements AfterViewInit {
     year = new Date().toLocaleString('en-US', {year: 'numeric'});
     month = new Date().toLocaleString('en-US', {month: 'long'});
     day = new Date().toLocaleString('en-US', {day: 'numeric'});
+    dialogRef;
 
     routes: Object[] = [
         {
@@ -68,14 +69,15 @@ export class TestpageComponent implements AfterViewInit {
     }
 
     composeMail(): void {
-        const dialogRef = this.dialog.open(NewMessageComponent, {
+        this.dialogRef = this.dialog.open(NewMessageComponent, {
             height: '70%',
-            width: '70%'
+            width: '70%',
+            disableClose: true,
         });
-
-        dialogRef.afterClosed().subscribe(result => {
+        this.dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog result: ${result}`);
         });
     }
+
 
 }

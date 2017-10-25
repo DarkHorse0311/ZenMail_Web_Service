@@ -15,6 +15,7 @@ import {CovalentHttpModule} from '@covalent/http';
 import {CovalentHighlightModule} from '@covalent/highlight';
 import {CovalentMarkdownModule} from '@covalent/markdown';
 import {CovalentDynamicFormsModule} from '@covalent/dynamic-forms';
+import { CovalentTextEditorModule } from '@covalent/text-editor';
 
 //Local App Modules
 import {AppRoutingModule} from './app-routing.module';
@@ -96,6 +97,7 @@ import { MessageComponent } from './pages/message/message.component';
         CovalentMenuModule,
         CovalentNotificationsModule,
         CovalentHttpModule.forRoot(),
+        CovalentTextEditorModule,
     ],
 
     declarations: [
