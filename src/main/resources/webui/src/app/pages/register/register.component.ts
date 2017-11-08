@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
             this.errMsg = 'you don not agree with terms';
             return;
         }
-        if(!this.validateId()){
+        if (!this.validateId()) {
             this.errMsg = 'Unacceptable symbols in name';
             return;
         }
@@ -38,13 +38,18 @@ export class RegisterComponent implements OnInit {
 
         this.registerService.register(this.model.name, this.model.email, this.model.password)
             .subscribe(resp => {
-                    if (resp.success !== true) {
-                        this.errMsg = 'registration error';
+
+                    if (resp === undefined || resp.success !== true || resp.success === undefined) {
+                        this.errMsg = 'User already exist';
                         return;
                     }
+
                     if (!resp.success) {
                         console.log('switching message #' + resp.message);
                         switch (resp.message) {
+                            case 1:
+                                this.errMsg = 'Registration error';
+                                break;
                             case 401:
                                 this.errMsg = 'Username is already exist';
                                 break;
@@ -62,6 +67,7 @@ export class RegisterComponent implements OnInit {
                         }
                         this.ngOnInit();
                     } else {
+
                         console.log('Going to landing page - ' + resp.landingPage);
                         this.loginRegisteredUser(this.model.name, this.model.password);
                     }
@@ -69,9 +75,9 @@ export class RegisterComponent implements OnInit {
             );
     }
 
-    validateId() : boolean{
+    validateId(): boolean {
         var str = this.model.name;
-        if(/^[a-zA-Z0-9- ]*$/.test(str) == false) {
+        if (/^[a-zA-Z0-9_.]*$/.test(str) == false) {
             return false;
         }
         return true;
