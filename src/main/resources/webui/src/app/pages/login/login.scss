@@ -1,7 +1,41 @@
+@import "../../../theme";
+
 :host /deep/ {
   md-divider {
     display: block;
     border-top-style: solid;
     border-top-width: 1px;
   }
+}
+
+.md-content {
+  a {
+    color: #2c3e50;
+    text-decoration: none;
+  }
+  a:hover {
+    color: mat-color($accent);
+  }
+  background-image: url("../../../assets/fogmountains.jpg");
+  background-size: 100% 100%;
+}
+
+.toolbar {
+  opacity: 1;
+}
+
+.card {
+  margin-top: 22px;
+}
+
+.login-button {
+  margin-bottom: 22px;
+}
+
+.footer {
+  background-color: transparent;
+}
+
+.margin {
+  margin-bottom: 15%;
 }

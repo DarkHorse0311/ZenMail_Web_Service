@@ -3,7 +3,6 @@
     <!--Alert -->
     <div *ngIf="showAppAlert" class="alert alert-app-level ">
         <button type="button" class="close" aria-label="Close" (click)="closeAppAlert()">
-            <clr-icon aria-hidden="true" shape="close"></clr-icon>
         </button>
         <div class="alert-item">
             <div class="alert-text">
@@ -31,7 +30,6 @@
         <div class="header-actions">
             <label style="line-height: 60px;"> {{userName}}</label>
             <a [routerLink]="'/logout'" class="nav-link nav-text">
-                <clr-icon shape="power"></clr-icon>
             </a>
         </div>
     </header>

@@ -1,0 +1,24 @@
+@import "../../../theme";
+
+body, html {
+  overflow: hidden;
+}
+
+.sidepanel {
+  background-color: #dbe0e6;
+  flex-direction: column;
+
+  .buttons {
+    margin-top: 22px;
+    margin-bottom: 22px;
+    font-weight: bold;
+  }
+}
+
+.md-icon-logo {
+  margin-right: 0;
+  [dir='rtl'] & {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

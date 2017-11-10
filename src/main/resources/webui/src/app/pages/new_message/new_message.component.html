@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<form #messageForm="ngForm">
+    <md-dialog-content>
+        <td-layout-nav class="reverse-pad-top">
+            <div td-toolbar-content layout="row" layout-align="center center" flex>
+
+                <button *ngIf="!isFullscreen" md-icon-button class="td-menu-button"
+                        (click)="fullscreen()" mdTooltip="Fullscreen">
+                    <md-icon>fullscreen</md-icon>
+                </button>
+
+                <button *ngIf="isFullscreen" md-icon-button class="td-menu-button"
+                        (click)="exitFullscreen()" mdTooltip="Exit fullscreen">
+                    <md-icon>fullscreen_exit</md-icon>
+                </button>
+
+                <md-icon>person</md-icon>
+                <span md-line>Andrew Shipilo [admin@zenmail.space]</span>
+
+                <span flex></span>
+                <button md-icon-button mdTooltip="Send">
+                    <md-icon>send</md-icon>
+                </button>
+                <button md-icon-button mdTooltip="Save">
+                    <md-icon>save</md-icon>
+                </button>
+                <button md-icon-button md-dialog-close mdTooltip="Close">
+                    <md-icon>close</md-icon>
+                </button>
+            </div>
+        </td-layout-nav>
+    </md-dialog-content>
+
+    <md-dialog-content>
+        <div class="pad-top " layout="row" flex>
+            <span flex></span>
+            <md-input-container flex="95">
+                <input mdInput placeholder="Add recipient"
+                       type="text"
+                       name="username" required>
+            </md-input-container>
+            <span flex></span>
+        </div>
+        <div class="pad-bottom" layout="row" flex>
+            <span flex></span>
+            <md-input-container flex="95">
+                <span flex></span>
+                <input mdInput placeholder="Subject"
+                       type="text"
+                       name="password" required>
+            </md-input-container>
+            <span flex></span>
+        </div>
+        <td-text-editor #textEditor></td-text-editor>
+    </md-dialog-content>
+</form>
