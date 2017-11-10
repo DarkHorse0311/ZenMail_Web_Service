@@ -30,8 +30,8 @@ public class UserService {
         return user;
     }
 
-    public User getUserInfoByUserId(String userId) {
-        User user = this.userRepo.findOneByUserId(userId).orElseGet(() -> new User());
+    public User getUserInfoByUserId(String username) {
+        User user = this.userRepo.findOneByUsername(username).orElseGet(() -> new User());
         return user;
     }
 
@@ -41,12 +41,11 @@ public class UserService {
     }
 
     public boolean addNewUser(User user) {
-        User newUser = this.getUserInfoByUserId(user.getUserId());
-        if (newUser.getUserId().equals("new")) {
-            // This means the username is not found therefore its is returning a default value of "new"
-            return this.insertOrSaveUser(user);
-        } else {
+        if(userRepo.findOneByUsername(user.getUsername()).isPresent()){
             return false;
+        }
+        else{
+            return this.insertOrSaveUser(user);
         }
     }
 

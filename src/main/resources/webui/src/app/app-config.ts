@@ -11,7 +11,7 @@ export class AppConfig {
     public locale: string = "en-US";
 
     // API Related configs
-    public apiPort: string = "8448";
+    public apiPort: string = "9449";
     public apiProtocol: string;
     public apiHostName: string;
     public baseApiPath: string;

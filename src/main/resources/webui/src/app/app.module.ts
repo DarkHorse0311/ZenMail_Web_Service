@@ -40,6 +40,7 @@ import {UserInfoService} from './services/user-info.service';
 import {AuthGuard} from './services/auth_guard.service';
 import {ApiRequestService} from './services/api/api-request.service';
 import {LoginService} from './services/api/login.service';
+import {RegisterService} from "./services/api/register.service";
 
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {CommonModule} from '@angular/common';
@@ -121,6 +122,7 @@ import { MessageComponent } from './pages/message/message.component';
         UserInfoService,
         ApiRequestService,
         LoginService,
+        RegisterService,
         AppConfig,
     ],
 

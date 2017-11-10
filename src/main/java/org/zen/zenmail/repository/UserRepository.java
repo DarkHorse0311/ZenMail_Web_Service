@@ -6,7 +6,7 @@ import org.zen.zenmail.model.user.User;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findOneByUserId(String userId);
+    Optional<User> findOneByUsername(String username);
 
-    Optional<User> findOneByUserIdAndPassword(String userId, String password);
+    Optional<User> findOneByUsernameAndPassword(String username, String password);
 }
