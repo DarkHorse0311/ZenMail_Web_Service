@@ -7,9 +7,9 @@ import java.util.List;
 @Data
 public class SessionItem {
     private String token;
-    private String userId;
-    private String firstName;
-    private String lastName;
+    private String username;
+    private String name;
+    //private String lastName;
     private String email;
-    private List<String> roles;
+    //private List<String> roles;
 }

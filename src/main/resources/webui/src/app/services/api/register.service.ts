@@ -10,7 +10,7 @@ import {UserInfoService, LoginInfoInStorage, RegisterInfoStorage} from '../user-
 import {ApiRequestService} from './api-request.service';
 
 export interface RegisterServiceParams {
-    userId: string;
+    username: string;
     password: string;
     email: string;
 }
@@ -29,7 +29,7 @@ export class RegisterService {
     register(userId: string, email: string, password: string): Observable<any> {
         let me = this;
         let bodyData: RegisterServiceParams = {
-            "userId": userId,
+            "username": userId,
             "email": email,
             "password": password,
         };

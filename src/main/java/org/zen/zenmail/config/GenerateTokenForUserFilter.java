@@ -67,10 +67,10 @@ public class GenerateTokenForUserFilter extends AbstractAuthenticationProcessing
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String tokenString = this.tokenUtil.createTokenForUser(tokenUser);
 
-        respItem.setFirstName(tokenUser.getUser().getFirstName());
-        respItem.setLastName(tokenUser.getUser().getLastName());
-        respItem.setUserId(tokenUser.getUser().getUserId());
-        respItem.setEmail(tokenUser.getUser().getEmail());
+        respItem.setName(tokenUser.getUser().getName());
+        //respItem.setLastName(tokenUser.getUser().getLastName());
+        respItem.setUsername(tokenUser.getUser().getUsername());
+        respItem.setEmail(tokenUser.getUser().getUsername());
         respItem.setToken(tokenString);
 
         resp.setOperationStatus(OperationResponse.ResponseStatusEnum.SUCCESS);

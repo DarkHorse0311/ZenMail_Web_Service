@@ -30,8 +30,8 @@ public class UserService {
         return user;
     }
 
-    public User getUserInfoByUserId(String userId) {
-        User user = this.userRepo.findOneByUserId(userId).orElseGet(() -> new User());
+    public User getUserInfoByUserId(String username) {
+        User user = this.userRepo.findOneByUsername(username).orElseGet(() -> new User());
         return user;
     }
 
@@ -41,7 +41,7 @@ public class UserService {
     }
 
     public boolean addNewUser(User user) {
-        if(userRepo.findOneByUserId(user.getUserId()).isPresent()){
+        if(userRepo.findOneByUsername(user.getUsername()).isPresent()){
             return false;
         }
         else{
