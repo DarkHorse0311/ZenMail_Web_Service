@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<td-layout-nav-list #navList
+                    navigationRoute="/"
+                    [opened]="media.registerQuery('gt-xs') | async"
+                    [mode]="(media.registerQuery('gt-xs') | async) ? 'side' : 'push'"
+                    [sidenavWidth]="(media.registerQuery('gt-xs') | async) ? '200px' : '100%'">
+
+    <div td-sidenav-toolbar-content layout="row" layout-align="center center" flex>
+        <span flex></span>
+        <!--<md-icon layout="center" class="md-icon-logo cursor-pointer" svgIcon="assets:rsa"></md-icon>-->
+        <span class="logo-font">ZenMail</span>
+        <span flex></span>
+    </div>
+    <div td-toolbar-content layout="row" layout-align="start center" flex>
+        <button *ngIf="sidenavopened" md-icon-button class="td-menu-button"
+                (click)="navList.toggle(); toggleSideNav()">
+            <md-icon>fullscreen</md-icon>
+        </button>
+        <button *ngIf="!sidenavopened" md-icon-button class="td-menu-button"
+                (click)="navList.toggle(); toggleSideNav()">
+            <md-icon>fullscreen_exit</md-icon>
+        </button>
+        <span>
+            <div flex layout="column" class="md-caption text-upper">
+                <span flex>{{weekday}}</span>
+                <span flex>{{month}}</span>
+                <span flex>{{year}}</span>
+            </div>
+        </span>
+        <span class="md-display-2">{{day}}</span>
+        <td-search-box #searchBox class="pull-top-sm pull-bottom-sm" placeholder="Search here" flex>
+        </td-search-box>
+        <button md-icon-button [mdMenuTriggerFor]="notificationsMenu">
+            <td-notification-count color="accent" [notifications]="4">
+                <md-icon>apps</md-icon>
+            </td-notification-count>
+        </button>
+        <md-menu #notificationsMenu="mdMenu">
+            <td-menu>
+                <div td-menu-header class="md-subhead">Templates</div>
+                <md-nav-list dense>
+                    <a md-list-item>
+                        <md-icon md-list-avatar>system_update_alt</md-icon>
+                        <h4 md-line><span class="text-wrap">Landing Page</span></h4>
+                        <p md-line>a landing page template</p>
+                    </a>
+                    <md-divider></md-divider>
+                    <a md-list-item>
+                        <md-icon md-list-avatar>dashboard</md-icon>
+                        <h4 md-line><span class="text-wrap">Dashboard</span></h4>
+                        <p md-line>an ngx-charts dashboard template</p>
+                    </a>
+                    <md-divider></md-divider>
+                    <a md-list-item>
+                        <md-icon md-list-avatar>email</md-icon>
+                        <h4 md-line><span class="text-wrap">Email App</span></h4>
+                        <p md-line>an email app template</p>
+                    </a>
+                    <md-divider></md-divider>
+                    <a md-list-item>
+                        <md-icon md-list-avatar>view_array</md-icon>
+                        <h4 md-line><span class="text-wrap">IDE Editor</span></h4>
+                        <p md-line>an IDE text editor app template</p>
+                    </a>
+                </md-nav-list>
+                <a md-button color="accent" td-menu-footer
+                   href="https://github.com/Teradata/covalent-quickstart/tree/develop/src/app/templates"
+                   target="_blank">
+                    View Code
+                </a>
+            </td-menu>
+        </md-menu>
+        <button md-icon-button mdTooltip="Menu" [mdMenuTriggerFor]="toolbarMenu1">
+            <img md-card-avatar
+                 src="http://www.tania-soleil.com/wp-content/uploads/2017/09/Herman_Hesse.jpg"/>
+        </button>
+        <md-menu #toolbarMenu1="mdMenu">
+            <td-menu>
+                <md-nav-list dense>
+                    <a md-list-item>
+                        <h4 md-line><span class="text-wrap text-upper">Andrew Shipilo</span></h4>
+                        <p md-line>admin@zenmail.space</p>
+                    </a>
+                    <md-divider></md-divider>
+                    <button md-menu-item>
+                        <md-icon>settings</md-icon>
+                        <span>Settings</span>
+                    </button>
+                    <button md-menu-item [routerLink]="'/logout'">
+                        <md-icon>exit_to_app</md-icon>
+                        <span>Sign out</span>
+                    </button>
+                </md-nav-list>
+            </td-menu>
+        </md-menu>
+    </div>
+    <md-nav-list layout-fill flex class="sidepanel" td-sidenav-content
+                 (click)="!media.query('gt-sm') && navList.close()">
+        <div layout="row">
+            <span flex></span>
+            <button flex="70" align="center" md-raised-button color="accent" class="text-upper buttons"
+                    (click)="composeMail()">
+                Compose
+            </button>
+            <span flex></span>
+        </div>
+
+        <ng-template let-item let-last="last" ngFor [ngForOf]="routes">
+            <a md-list-item class="tc-grey-700" [routerLink]="item.route">
+                <md-icon class="tc-grey-700">{{item.icon}}</md-icon>
+                {{item.title}}</a>
+        </ng-template>
+    </md-nav-list>
+
+    <router-outlet></router-outlet>
+</td-layout-nav-list>

@@ -19,18 +19,21 @@
 
 // Create the theme object (a Sass map containing all of the palettes).
 //$theme: mat-light-theme($primary, $accent, $warn);
+.logo-font {
+  font-size: 28px;
+}
 
 .md-content {
-  background-color: #ECF0F1;
+  background-color: #e8edf3;
 }
 
 $mat-light-theme-background: (
-        status-bar:white,
-        app-bar: white,
-        background: white,
+        status-bar: whitesmoke,
+        app-bar: whitesmoke,
+        background: whitesmoke,
         hover: rgba(black, 0.04), // TODO(kara): check style with Material Design UX
-        card: white,
-        dialog: white,
+        card: whitesmoke,
+        dialog: whitesmoke,
         disabled-button: $black-12-opacity,
         raised-button: white,
         focused-button: $black-6-opacity,
@@ -39,8 +42,75 @@ $mat-light-theme-background: (
         disabled-button-toggle: map_get($mat-grey, 200),
 );
 
-$primary: mat-palette($mat-blue-grey, 800);
-$accent: mat-palette($mat-deep-orange, 700);
+$mat-blue-grey: (
+        50: #eceff1,
+        100: #cfd8dc,
+        200: #b0bec5,
+        300: #90a4ae,
+        400: #78909c,
+        500: #607d8b,
+        600: #546e7a,
+        700: #455a64,
+        800: #37474f,
+        900: #263238,
+        A100: #cfd8dc,
+        A200: #b0bec5,
+        A400: #78909c,
+        A700: #979da9,
+        contrast: (
+                50: $black-87-opacity,
+                100: $black-87-opacity,
+                200: $black-87-opacity,
+                300: $black-87-opacity,
+                400: white,
+                500: white,
+                600: $white-87-opacity,
+                700: $white-87-opacity,
+                800: $white-87-opacity,
+                900: $white-87-opacity,
+                A100: $black-87-opacity,
+                A200: $black-87-opacity,
+                A400: white,
+                A700: $white-87-opacity,
+        )
+);
+
+$mat-brown: (
+        50: #efebe9,
+        100: #d7ccc8,
+        200: #bcaaa4,
+        300: #a1887f,
+        400: #8d6e63,
+        500: #795548,
+        600: #6d4c41,
+        700: #a3703b,
+        800: #4e342e,
+        900: #3e2723,
+        A100: #d7ccc8,
+        A200: #bcaaa4,
+        A400: #8d6e63,
+        A700: #5d4037,
+        contrast: (
+                50: $black-87-opacity,
+                100: $black-87-opacity,
+                200: $black-87-opacity,
+                300: white,
+                400: white,
+                500: $white-87-opacity,
+                600: $white-87-opacity,
+                700: $white-87-opacity,
+                800: $white-87-opacity,
+                900: $white-87-opacity,
+                A100: $black-87-opacity,
+                A200: $black-87-opacity,
+                A400: white,
+                A700: $white-87-opacity,
+        )
+);
+
+$primary: mat-palette($mat-blue-grey, A700);
+//$accent: mat-palette($mat-deep-orange, 700);
+$accent: mat-palette($mat-brown, 700);
 $warn: mat-palette($mat-red, 500);
 
 $theme: mat-light-theme($primary, $accent, $warn);
@@ -52,7 +122,6 @@ $theme: mat-light-theme($primary, $accent, $warn);
 @include covalent-theme($theme);
 @include covalent-markdown-theme($theme);
 @include covalent-highlight-theme();
-
 // Active icon color in list nav
 md-nav-list {
   [md-list-item].active {
@@ -108,4 +177,12 @@ ngx-charts-line-chart {
       stroke-width: 2;
     }
   }
+}
+
+.mat-dialog-container {
+  overflow: hidden !important;
+  border-radius: 5px !important;
+  padding: 0 !important;
+  margin: auto !important;
+  max-width: none !important;
 }
