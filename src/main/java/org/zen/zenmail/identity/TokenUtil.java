@@ -44,6 +44,7 @@ public class TokenUtil {
 
         User user = new User();
         user.setUsername((String) claims.get("username"));
+        user.setName((String) claims.get("fullname"));
         //user.setCustomerId((Integer)claims.get("customerId"));
         //user.setRole((String)claims.get("role"));
         user.setRole(Role.valueOf((String) claims.get("role")));

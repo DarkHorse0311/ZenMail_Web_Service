@@ -48,7 +48,8 @@ public class GenerateTokenForUserFilter extends AbstractAuthenticationProcessing
             JSONObject userJSON = new JSONObject(jsonString);
             String username = userJSON.getString("username");
             String password = userJSON.getString("password");
-            log.info("username:{} and password:{} \n", username, password);
+            String fullname = userJSON.getString("fullname");
+            log.info("username:{} and password:{} and fullname:{}\n", username, password, fullname);
 
             final UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, password);
             return getAuthenticationManager().authenticate(authToken); // This will take to successfulAuthentication or faliureAuthentication function
@@ -67,10 +68,10 @@ public class GenerateTokenForUserFilter extends AbstractAuthenticationProcessing
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String tokenString = this.tokenUtil.createTokenForUser(tokenUser);
 
-        respItem.setName(tokenUser.getUser().getName());
+        //respItem.setName(tokenUser.getUser().getName());
         //respItem.setLastName(tokenUser.getUser().getLastName());
         respItem.setUsername(tokenUser.getUser().getUsername());
-        respItem.setEmail(tokenUser.getUser().getUsername());
+        respItem.setName(tokenUser.getUser().getName());
         respItem.setToken(tokenString);
 
         resp.setOperationStatus(OperationResponse.ResponseStatusEnum.SUCCESS);

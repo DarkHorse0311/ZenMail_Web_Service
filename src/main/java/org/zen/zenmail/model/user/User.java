@@ -15,7 +15,7 @@ public class User {
     @Id
     private String username;
     @Getter @Setter private String password;
-    @Getter @Setter private String name;
+    @Getter private String name;
     @Getter @Setter private String maildir;
     @Getter @Setter private long quota;
     @Getter @Setter private String local_part;
@@ -35,6 +35,10 @@ public class User {
 
     public void setRole(Role role){
 
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 
     public String getname(String username){

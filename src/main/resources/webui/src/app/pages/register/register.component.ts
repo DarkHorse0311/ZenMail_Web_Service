@@ -30,13 +30,14 @@ export class RegisterComponent implements OnInit {
             this.errMsg = 'you don not agree with terms';
             return;
         }
-        /*if (!this.validateId()) {
-            this.errMsg = 'Unacceptable symbols in name';
+        if (!this.validateId()) {
+            this.errMsg = 'Unacceptable symbols in name\nUse only a-z A-Z . - _';
             return;
-        }*/
+        }
 
+        this.model.name += '@zenmail.space';
 
-        this.registerService.register(this.model.name, this.model.email, this.model.password)
+        this.registerService.register(this.model.name, this.model.fullname, this.model.password)
             .subscribe(resp => {
 
                     debugger;
@@ -81,9 +82,9 @@ export class RegisterComponent implements OnInit {
         /*if (/^[a-zA-Z0-9_.@]*$/.test(str) == false) {
             return false;
         }*/
-        /*if (/^[a-zA-Z0-9_.]*$/.test(str) == false) {
+        if (/^[a-zA-Z0-9_.]*$/.test(str) == false) {
             return false;
-        }*/
+        }
         return true;
     }
 
