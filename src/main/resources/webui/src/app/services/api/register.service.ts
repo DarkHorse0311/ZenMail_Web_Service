@@ -12,7 +12,7 @@ import {ApiRequestService} from './api-request.service';
 export interface RegisterServiceParams {
     username: string;
     password: string;
-    fullname: string;
+    name: string;
 }
 
 @Injectable()
@@ -26,11 +26,11 @@ export class RegisterService {
     }
 
     // noinspection JSAnnotator
-    register(userId: string, fullname: string, password: string): Observable<any> {
+    register(userId: string, name: string, password: string): Observable<any> {
         let me = this;
         let bodyData: RegisterServiceParams = {
             "username": userId,
-            "fullname": fullname,
+            "name": name,
             "password": password,
         };
         let registerDataSubject: Subject<any> = new Subject<any>(); // Will use this subject to emit data that we want after ajax login attempt

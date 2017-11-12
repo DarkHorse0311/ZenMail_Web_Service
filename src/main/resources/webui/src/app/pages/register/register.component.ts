@@ -35,9 +35,9 @@ export class RegisterComponent implements OnInit {
             return;
         }
 
-        this.model.name += '@zenmail.space';
+        this.model.username += '@zenmail.space';
 
-        this.registerService.register(this.model.name, this.model.fullname, this.model.password)
+        this.registerService.register(this.model.username, this.model.name, this.model.password)
             .subscribe(resp => {
 
                     debugger;

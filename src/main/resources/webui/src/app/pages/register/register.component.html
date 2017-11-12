@@ -28,7 +28,7 @@
                                 <md-input-container flex="85">
                                     <input mdInput #nameElement #nameControl="ngModel" placeholder="Username"
                                            type="text" maxlength="30"
-                                           name="username" [(ngModel)]="model.name" required>
+                                           name="username" [(ngModel)]="model.username" required>
                                     <md-hint align="start">
                     <span [hidden]="!nameControl.errors?.required || nameControl.pristine"
                           class="tc-red-600">Required</span>
@@ -42,7 +42,7 @@
                                 <md-input-container flex="85">
                                     <input mdInput #mailElement #mailControl="ngModel" placeholder="Full name"
                                            type="text" maxlength="30"
-                                           name="fullname" [(ngModel)]="model.fullname" required>
+                                           name="name" [(ngModel)]="model.name" required>
                                     <md-hint align="start">
                     <span [hidden]="!mailControl.errors?.required || mailControl.pristine"
                           class="tc-red-600">Required</span>
