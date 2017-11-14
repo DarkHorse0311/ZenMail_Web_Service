@@ -3,6 +3,7 @@ import {LoginService} from '../../services/api/login.service';
 import {Router} from '@angular/router';
 import {RegisterService} from "../../services/api/register.service";
 import {Observable} from "rxjs/Observable";
+import {_dom} from "@angular/flex-layout/utils/testing/dom-tools";
 
 @Component({
     templateUrl: './register.component.html',
@@ -12,6 +13,7 @@ import {Observable} from "rxjs/Observable";
 export class RegisterComponent implements OnInit {
     model: any = {};
     errMsg: string = '';
+    domain: string = '@zenmail.space'
 
     constructor(private router: Router,
                 private registerService: RegisterService,
@@ -34,12 +36,11 @@ export class RegisterComponent implements OnInit {
             this.errMsg = 'Unacceptable symbols in name\nUse only a-z,A-Z,.-_';
             return;
         }
-
-        var str = this.model.username;
-        str.concat('@zenmail.space');
+        debugger;
+        var fullUserName = this.model.username.concat(this.domain);
 
         debugger;
-        this.registerService.register(str, this.model.name, this.model.password)
+        this.registerService.register(fullUserName, this.model.name, this.model.password)
             .subscribe(resp => {
 
                     debugger;
@@ -73,18 +74,19 @@ export class RegisterComponent implements OnInit {
                     } else {
                         debugger;
                         console.log('Going to landing page - ' + resp.landingPage);
-                        this.loginRegisteredUser(str, this.model.password);
+                        this.loginRegisteredUser(fullUserName, this.model.password);
                     }
                 }
             );
     }
 
     validateId(): boolean {
-        var str = this.model.username;
-        /*if (/^[a-zA-Z0-9_.@]*$/.test(str) == false) {
+        var userName = this.model.username;
+        var name = this.model.name
+        if (/^[a-zA-Z0-9_.]*$/.test(userName) == false) {
             return false;
-        }*/
-        if (/^[a-zA-Z0-9_.]*$/.test(str) == false) {
+        }
+        if (/^[a-zA-Z0-9_.]*$/.test(name) == false) {
             return false;
         }
         return true;
