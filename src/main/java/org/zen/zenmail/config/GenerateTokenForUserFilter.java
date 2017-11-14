@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,12 +14,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+import org.springframework.security.web.context.support.SecurityWebApplicationContextUtils;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.stereotype.Service;
+import org.zen.zenmail.api.user.UserService;
+import org.zen.zenmail.crypt.Hash;
 import org.zen.zenmail.identity.TokenUser;
 import org.zen.zenmail.identity.TokenUtil;
 import org.zen.zenmail.model.response.OperationResponse;
 import org.zen.zenmail.model.session.SessionItem;
 import org.zen.zenmail.model.session.SessionResponse;
+import org.zen.zenmail.repository.UserRepository;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -29,6 +35,7 @@ import java.io.IOException;
 
 /* This filter maps to /session and tries to validate the username and password */
 @Slf4j
+
 public class GenerateTokenForUserFilter extends AbstractAuthenticationProcessingFilter {
 
     private TokenUtil tokenUtil;
@@ -48,6 +55,11 @@ public class GenerateTokenForUserFilter extends AbstractAuthenticationProcessing
             JSONObject userJSON = new JSONObject(jsonString);
             String username = userJSON.getString("username");
             String password = userJSON.getString("password");
+
+
+            UserRepository userRep = tokenUtil.getUserRepository();
+
+            password = Hash.hashWitDBSalt(password, userRep.findOneByUsername(username).get().getPassword());
             //String fullname = userJSON.getString("fullname");
             //log.info("username:{} and password:{} and fullname:{}\n", username, password, fullname);
 

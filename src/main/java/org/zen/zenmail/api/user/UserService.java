@@ -8,11 +8,25 @@ import org.zen.zenmail.crypt.Hash;
 import org.zen.zenmail.model.user.User;
 import org.zen.zenmail.repository.UserRepository;
 
+import java.util.Base64;
+
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepo;
+
+    public String getSaltFromDB(String username){
+        StringBuilder salt = new StringBuilder("");
+        if(userRepo.findOneByUsername(username).isPresent()){
+            User user = userRepo.findOneByUsername(username).get();
+            String hashPassword = user.getPassword();
+            for(int i = 43; i < hashPassword.length(); ++i){
+                salt.append(hashPassword.charAt(i));
+            }
+        }
+        return Base64.getDecoder().decode(salt.toString()).toString();
+    }
 
     public String getLoggedInUserId() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -46,9 +60,11 @@ public class UserService {
             return false;
         }
         else{
-            user.setPassword(Hash.getSHA256password(user.getPassword()));
+            Hash hash = new Hash();
+            user.setPassword(hash.hashWithRandomSalt(user.getPassword()));
             return this.insertOrSaveUser(user);
         }
     }
+
 
 }

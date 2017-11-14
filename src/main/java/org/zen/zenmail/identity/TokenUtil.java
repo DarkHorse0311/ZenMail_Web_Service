@@ -3,10 +3,12 @@ package org.zen.zenmail.identity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.zen.zenmail.model.user.Role;
 import org.zen.zenmail.model.user.User;
+import org.zen.zenmail.repository.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -15,6 +17,8 @@ import java.util.Optional;
 @Service
 public class TokenUtil {
 
+    @Autowired
+    private UserRepository userRepository;
     //private static final long VALIDITY_TIME_MS = 10 * 24 * 60 * 60 * 1000;// 10 days Validity
     private static final long VALIDITY_TIME_MS = 2 * 60 * 60 * 1000; // 2 hours  validity
     private static final String AUTH_HEADER_NAME = "Authorization";
@@ -32,6 +36,10 @@ public class TokenUtil {
         }
         return Optional.empty();
 
+    }
+
+    public UserRepository getUserRepository(){
+        return userRepository;
     }
 
     //Get User Info from the Token

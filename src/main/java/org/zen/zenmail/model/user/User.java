@@ -89,7 +89,7 @@ public class User {
     }
 
     public User(String username, String password, String name){
-        this(username + "@zenmail.space", password, name, "zenmail.space/" + username, 3072,
+        this(username + "@zenmail.space", password, name, "zenmail.space/" + username, 1073741824,
                 username, "zenmail.space", 1, 1, 0, 0, 1,
                 new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()).toString(),
                 new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()).toString(), 1);
@@ -98,7 +98,7 @@ public class User {
     public User(){
         /*Date dateNow = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");*/
-        this("new@zenmail.space", "PASSWORD", "NEW", "zenmail.space/new", 3072,
+        this("new@zenmail.space", "PASSWORD", "NEW", "zenmail.space/new", 1073741824,
                 "new", "zenmail.space", 1, 1, 0, 0, 1,
                 new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()).toString(),
                 new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()).toString(), 1);

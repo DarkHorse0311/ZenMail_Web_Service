@@ -31,13 +31,15 @@ export class RegisterComponent implements OnInit {
             return;
         }
         if (!this.validateId()) {
-            this.errMsg = 'Unacceptable symbols in name\nUse only a-z A-Z . - _';
+            this.errMsg = 'Unacceptable symbols in name\nUse only a-z,A-Z,.-_';
             return;
         }
 
-        this.model.username += '@zenmail.space';
+        var str = this.model.username;
+        str.concat('@zenmail.space');
 
-        this.registerService.register(this.model.username, this.model.name, this.model.password)
+        debugger;
+        this.registerService.register(str, this.model.name, this.model.password)
             .subscribe(resp => {
 
                     debugger;
@@ -69,16 +71,16 @@ export class RegisterComponent implements OnInit {
                         }
                         this.ngOnInit();
                     } else {
-
+                        debugger;
                         console.log('Going to landing page - ' + resp.landingPage);
-                        this.loginRegisteredUser(this.model.name, this.model.password);
+                        this.loginRegisteredUser(str, this.model.password);
                     }
                 }
             );
     }
 
     validateId(): boolean {
-        var str = this.model.name;
+        var str = this.model.username;
         /*if (/^[a-zA-Z0-9_.@]*$/.test(str) == false) {
             return false;
         }*/
@@ -103,6 +105,7 @@ export class RegisterComponent implements OnInit {
     }
 
     loginRegisteredUser(userName: string, password: string) {
+        debugger;
         this.loginService.getToken(userName, password)
             .subscribe(resp => {
                     if (resp.user === undefined || resp.user.token === undefined || resp.user.token === "INVALID") {
