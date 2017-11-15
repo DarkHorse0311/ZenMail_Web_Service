@@ -5,7 +5,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.zen.zenmail.crypt.Hash;
+import org.zen.zenmail.model.databaseadditionalcontent.Alias;
+import org.zen.zenmail.model.databaseadditionalcontent.UserAcl;
 import org.zen.zenmail.model.user.User;
+import org.zen.zenmail.repository.AliasRepository;
+import org.zen.zenmail.repository.UserAclRepository;
 import org.zen.zenmail.repository.UserRepository;
 
 import java.util.Base64;
@@ -15,6 +19,10 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepo;
+    @Autowired
+    private AliasRepository aliasRepo;
+    @Autowired
+    private UserAclRepository userAclRepo;
 
     public String getSaltFromDB(String username){
         StringBuilder salt = new StringBuilder("");
@@ -52,6 +60,7 @@ public class UserService {
 
     public boolean insertOrSaveUser(User user) {
         this.userRepo.save(user);
+        additionalDataBaseInformation(user);
         return true;
     }
 
@@ -60,11 +69,18 @@ public class UserService {
             return false;
         }
         else{
-            Hash hash = new Hash();
-            user.setPassword(hash.hashWithRandomSalt(user.getPassword()));
+            user.setPassword(Hash.hashWithRandomSalt(user.getPassword()));
             return this.insertOrSaveUser(user);
         }
     }
 
+    public void additionalDataBaseInformation(User user){
+        Alias alias = new Alias(user.getUsername(), user.getUsername(), "zenmail.space",
+                user.getCreated(), user.getCreated(), 1);
+        UserAcl userAcl = new UserAcl(user.getUsername());
+
+        this.aliasRepo.save(alias);
+        this.userAclRepo.save(userAcl);
+    }
 
 }
