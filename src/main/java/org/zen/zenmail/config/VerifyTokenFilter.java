@@ -43,6 +43,7 @@ public class VerifyTokenFilter extends GenericFilterBean {
             filterChain.doFilter(req, res);
         }
         catch (JwtException e) {
+            e.getLocalizedMessage();
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         }
         finally {

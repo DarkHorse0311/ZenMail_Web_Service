@@ -22,7 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         // Filters will not get executed for the resources
-        web.ignoring().antMatchers("/", "/resources/**", "/static/**", "/public/**", "/webui/**", "/h2-console/**"
+        web.ignoring().antMatchers("/", "/resources/**", "/static/**", "/public/**", "/webui/**"//, "/h2-console/**"
             , "/configuration/**", "/swagger-ui/**", "/swagger-resources/**", "/api-docs", "/api-docs/**", "/v2/api-docs/**"
             , "/*.html", "/**/*.html" ,"/**/*.css","/user","/**/*.js","/**/*.png","/**/*.jpg", "/**/*.gif", "/**/*.svg", "/**/*.ico", "/**/*.ttf","/**/*.woff");
     }
@@ -33,16 +33,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
         .exceptionHandling().and()
         .anonymous().and()
+                .authorizeRequests().antMatchers("/").permitAll()
+                .and().authorizeRequests().antMatchers("console/**", "h2-console/**").permitAll().and()
         // Disable Cross site references
-        .csrf().disable()
+        .csrf().disable().headers().frameOptions().disable().and()
         // Add CORS Filter
         .addFilterBefore(new CorsFilter(), ChannelProcessingFilter.class)
         // Custom Token based authentication based on the header previously given to the client
         .addFilterBefore(new VerifyTokenFilter(tokenUtil), UsernamePasswordAuthenticationFilter.class)
         // custom JSON based authentication by POST of {"username":"<name>","password":"<password>"} which sets the token header upon authentication
         .addFilterBefore(new GenerateTokenForUserFilter ("/session", authenticationManager(), tokenUtil), UsernamePasswordAuthenticationFilter.class)
-        .authorizeRequests()
-        .anyRequest().authenticated()
+        //.authorizeRequests()
+
+        //.anyRequest().authenticated()
         ;
     }
 }

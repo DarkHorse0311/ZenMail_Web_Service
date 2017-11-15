@@ -3,6 +3,7 @@ import {LoginService} from '../../services/api/login.service';
 import {Router} from '@angular/router';
 import {RegisterService} from "../../services/api/register.service";
 import {Observable} from "rxjs/Observable";
+import {_dom} from "@angular/flex-layout/utils/testing/dom-tools";
 
 @Component({
     templateUrl: './register.component.html',
@@ -12,6 +13,7 @@ import {Observable} from "rxjs/Observable";
 export class RegisterComponent implements OnInit {
     model: any = {};
     errMsg: string = '';
+    domain: string = '@zenmail.space'
 
     constructor(private router: Router,
                 private registerService: RegisterService,
@@ -30,13 +32,15 @@ export class RegisterComponent implements OnInit {
             this.errMsg = 'you don not agree with terms';
             return;
         }
-        /*if (!this.validateId()) {
-            this.errMsg = 'Unacceptable symbols in name';
+        if (!this.validateId()) {
+            this.errMsg = 'Unacceptable symbols in name\nUse only a-z,A-Z,.-_';
             return;
-        }*/
+        }
+        debugger;
+        var fullUserName = this.model.username.concat(this.domain);
 
-
-        this.registerService.register(this.model.name, this.model.email, this.model.password)
+        debugger;
+        this.registerService.register(fullUserName, this.model.name, this.model.password)
             .subscribe(resp => {
 
                     debugger;
@@ -68,22 +72,23 @@ export class RegisterComponent implements OnInit {
                         }
                         this.ngOnInit();
                     } else {
-
+                        debugger;
                         console.log('Going to landing page - ' + resp.landingPage);
-                        this.loginRegisteredUser(this.model.name, this.model.password);
+                        this.loginRegisteredUser(fullUserName, this.model.password);
                     }
                 }
             );
     }
 
     validateId(): boolean {
-        var str = this.model.name;
-        /*if (/^[a-zA-Z0-9_.@]*$/.test(str) == false) {
+        var userName = this.model.username;
+        var name = this.model.name
+        if (/^[a-zA-Z0-9_.]*$/.test(userName) == false) {
             return false;
-        }*/
-        /*if (/^[a-zA-Z0-9_.]*$/.test(str) == false) {
+        }
+        if (/^[a-zA-Z0-9_.]*$/.test(name) == false) {
             return false;
-        }*/
+        }
         return true;
     }
 
@@ -102,6 +107,7 @@ export class RegisterComponent implements OnInit {
     }
 
     loginRegisteredUser(userName: string, password: string) {
+        debugger;
         this.loginService.getToken(userName, password)
             .subscribe(resp => {
                     if (resp.user === undefined || resp.user.token === undefined || resp.user.token === "INVALID") {
