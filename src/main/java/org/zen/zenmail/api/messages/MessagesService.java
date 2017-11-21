@@ -12,7 +12,7 @@ public class MessagesService {
     private static final String MAIL_SERVER_URL = "zenmail.space";
     private static final int MAIL_SERVER_IMAP_PORT = 993;
     private static final String MAIL_SERVER_SMTP_PORT = "587";
-    private static final String INBOX_FOLDER_NAME ="INBOX"
+    private static final String INBOX_FOLDER_NAME ="INBOX";
 
     public Message[] getMessages(User user) {
         Session session = Session.getDefaultInstance(new Properties( ));

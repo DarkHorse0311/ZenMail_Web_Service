@@ -1,5 +1,8 @@
 package org.zen.zenmail.config;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.*;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -18,6 +21,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private TokenUtil tokenUtil;
+    @Autowired
+    private UserDetailsService userDetailsService;
+
 
     @Override
     public void configure(WebSecurity web) throws Exception {
@@ -25,6 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/", "/resources/**", "/static/**", "/public/**", "/webui/**"//, "/h2-console/**"
             , "/configuration/**", "/swagger-ui/**", "/swagger-resources/**", "/api-docs", "/api-docs/**", "/v2/api-docs/**"
             , "/*.html", "/**/*.html" ,"/**/*.css","/user","/**/*.js","/**/*.png","/**/*.jpg", "/**/*.gif", "/**/*.svg", "/**/*.ico", "/**/*.ttf","/**/*.woff");
+
+
     }
 
     //If Security is not working check application.properties if it is set to ignore
@@ -48,4 +56,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //.anyRequest().authenticated()
         ;
     }
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.
+                eraseCredentials(false)
+                .userDetailsService(userDetailsService);
+        super.configure(auth);
+    }
+
+
+
 }

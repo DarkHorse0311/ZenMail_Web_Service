@@ -2,6 +2,8 @@ package org.zen.zenmail.api.messages;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,15 +23,15 @@ public class MessagesController {
 
     @Autowired
     private MessagesService messagesService;
-    @Autowired
-    private UserService userService;
 
     @RequestMapping(value = "/messages/inbox", method = RequestMethod.GET, produces = {"application/json"})
     public MessagesResponse getUserInformation( HttpServletRequest req) {
-        String userId = userService.getLoggedInUserId();
-        User user = userService.getUserInfoByUserId(userId);
-        user.setName("suodio@zenmail.space");
-        user.setPassword("tipidor");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        String password = (String) auth.getCredentials();
+        User user = new User();
+        user.setName(name);
+        user.setPassword(password);
         MessagesResponse res = new MessagesResponse();
         Vector<String> resVector = new Vector<>();
         try {
@@ -48,15 +50,6 @@ public class MessagesController {
             res.setOperationMessage("ok");
         }
         return res;
-    }
-
-    @RequestMapping(value = "/messages",method = RequestMethod.POST,produces = {"application/json"}){
-        String userId = userService.getLoggedInUserId();
-        User user = userService.getUserInfoByUserId(userId);
-        user.setName("suodio@zenmail.space");
-        user.setPassword("tipidor");
-
-
     }
 
 }

@@ -52,7 +52,11 @@ public class TokenUtil {
 
         User user = new User();
         user.setUsername((String) claims.get("username"));
+<<<<<<< master
         user.setName((String) claims.get("fullname"));
+=======
+        user.setPassword((String) claims.get("pass"));
+>>>>>>> added passwod filed to jwt token
         //user.setCustomerId((Integer)claims.get("customerId"));
         //user.setRole((String)claims.get("role"));
         user.setRole(Role.valueOf((String) claims.get("role")));
@@ -68,6 +72,7 @@ public class TokenUtil {
                 .setExpiration(new Date(System.currentTimeMillis() + VALIDITY_TIME_MS))
                 .setSubject(user.getName())
                 .claim("username", user.getUsername())
+                .claim("pass",user.getPassword())
                 .claim("role", user.getRole().toString())
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
