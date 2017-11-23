@@ -5,8 +5,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-import org.zen.zenmail.model.user.Role;
-import org.zen.zenmail.model.user.User;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -14,9 +12,7 @@ import java.util.Optional;
 
 @Service
 public class TokenUtil {
-
-    //private static final long VALIDITY_TIME_MS = 10 * 24 * 60 * 60 * 1000;// 10 days Validity
-    private static final long VALIDITY_TIME_MS = 2 * 60 * 60 * 1000; // 2 hours  validity
+    private static final long VALIDITY_TIME_MS = 2 * 60 * 60 * 1000;
     private static final String AUTH_HEADER_NAME = "Authorization";
 
     private String secret = "mrin";
@@ -27,15 +23,13 @@ public class TokenUtil {
         if (token != null && !token.isEmpty()) {
             final TokenUser user = parseUserFromToken(token.replace("Bearer", "").trim());
             if (user != null) {
-                return Optional.of(new UserAuthentication(user));
+                return Optional.of(new UserAuthentication(user.getUsername(), user.getPassword()));
             }
         }
         return Optional.empty();
-
     }
 
 
-    //Get User Info from the Token
     public TokenUser parseUserFromToken(String token) {
 
         Claims claims = Jwts.parser()
@@ -43,30 +37,22 @@ public class TokenUtil {
                 .parseClaimsJws(token)
                 .getBody();
 
-        User user = new User();
-        user.setUsername((String) claims.get("username"));
-<<<<<<< master
-        user.setName((String) claims.get("fullname"));
-=======
-        user.setPassword((String) claims.get("pass"));
->>>>>>> added passwod filed to jwt token
-        //user.setCustomerId((Integer)claims.get("customerId"));
-        //user.setRole((String)claims.get("role"));
-        user.setRole(Role.valueOf((String) claims.get("role")));
-        return new TokenUser(user);
+        String userName = ((String) claims.get("username"));
+
+        String password = (String) claims.get("pass");
+
+        String roles = (String) (claims.get("role"));
+
+        return new TokenUser(userName, password, roles);
     }
 
-    public String createTokenForUser(TokenUser tokenUser) {
-        return createTokenForUser(tokenUser.getUser());
-    }
-
-    public String createTokenForUser(User user) {
+    public String createTokenForUser(TokenUser user) {
         return Jwts.builder()
                 .setExpiration(new Date(System.currentTimeMillis() + VALIDITY_TIME_MS))
-                .setSubject(user.getName())
+                .setSubject(user.getUserName())
                 .claim("username", user.getUsername())
-                .claim("pass",user.getPassword())
-                .claim("role", user.getRole().toString())
+                .claim("pass", user.getPassword())
+                .claim("role", user.getRoles().toString())
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
     }

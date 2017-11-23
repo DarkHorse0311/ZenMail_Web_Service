@@ -20,13 +20,10 @@ public class UserDetailsService implements org.springframework.security.core.use
 
         final User user = userRepo.findOneByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
         TokenUser currentUser;
-        if (user.getActive() == 1){
-            currentUser = new TokenUser(user);
-        }
-        else{
+        if (user.getActive() == 1) {
+            currentUser = new TokenUser(user.getUsername(), user.getPassword(), user.getRole().toString());
+        } else {
             throw new DisabledException("User is not activated (Disabled User)");
-            //If pending activation return a disabled user
-            //currentUser = new TokenUser(user, false);
         }
         detailsChecker.check(currentUser);
         return currentUser;
