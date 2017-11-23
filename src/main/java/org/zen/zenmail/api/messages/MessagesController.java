@@ -35,10 +35,10 @@ public class MessagesController {
         MessagesResponse res = new MessagesResponse();
         Vector<String> resVector = new Vector<>();
         try {
-            Message[]msg = messagesService.getMessages(user);
-            for (Message m:
-                 msg) {
-                resVector.add(m.getContent().toString());
+            Vector<String > messages = messagesService.getMessages(user);
+            for (String m:
+                 messages) {
+                resVector.add(m);
             }
             res.setOperationStatus(OperationResponse.ResponseStatusEnum.SUCCESS);
             res.setOperationMessage("ok");
