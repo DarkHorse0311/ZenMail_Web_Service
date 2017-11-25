@@ -5,11 +5,14 @@ import org.apache.commons.io.IOUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.zen.zenmail.api.helpers.AuthHelper;
 import org.zen.zenmail.model.messages.MessagesResponse;
 import org.zen.zenmail.model.response.OperationResponse;
 import org.zen.zenmail.model.user.User;
@@ -27,8 +30,12 @@ public class MessagesController {
     private MessagesService messagesService;
 
     @RequestMapping(value = "/messages/inbox", method = RequestMethod.GET, produces = {"application/json"})
-    public MessagesResponse getUserInformation( HttpServletRequest req) {
+    public MessagesResponse getUserInformation( HttpServletRequest req, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(!AuthHelper.isLoggined(auth)){
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            return null;
+        }
         String name = auth.getName();
         String password = (String) auth.getCredentials();
         User user = new User();
@@ -57,6 +64,10 @@ public class MessagesController {
     @RequestMapping(value = "/messages", method = RequestMethod.POST, produces = {"application/json"})
     public void sendMessage(HttpServletRequest request, HttpServletResponse response){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(!AuthHelper.isLoggined(auth)){
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            return;
+        }
         String name = auth.getName();
         String password = (String) auth.getCredentials();
         User user = new User();
