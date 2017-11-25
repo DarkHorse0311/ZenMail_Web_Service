@@ -6,36 +6,39 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.Collection;
 
 public class UserAuthentication implements Authentication {
-    private final TokenUser user;
+    private final String userName;
+    private final String password;
+    private Collection<? extends GrantedAuthority> authorities;
     private boolean authenticated = true;
 
-    public UserAuthentication(TokenUser user) {
-        this.user = user;
+    public UserAuthentication(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
     }
 
     @Override
     public String getName() {
-        return user.getUsername();
+        return userName;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return user.getAuthorities();
+        return authorities;
     }
 
     @Override
     public Object getCredentials() {
-        return user.getPassword();
+        return password;
     }
 
     @Override
     public TokenUser getDetails() {
-        return user;
+        return null;
     }
 
     @Override
     public Object getPrincipal() {
-        return user.getUsername();
+        return userName;
     }
 
     @Override

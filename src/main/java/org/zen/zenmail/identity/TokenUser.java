@@ -1,23 +1,22 @@
 package org.zen.zenmail.identity;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.zen.zenmail.model.user.User;
 
 public class TokenUser extends org.springframework.security.core.userdetails.User {
-    private User user;
+    @Getter @Setter String userName;
+    @Getter @Setter String password;
+    @Getter @Setter String roles;
 
-    //For returning a normal user
-    public TokenUser(User user) {
-        super(user.getUsername(), user.getPassword(), AuthorityUtils.createAuthorityList(user.getRole().toString()));
-        //super(user.getUserName(), user.getPassword(), true, true, true, true,  AuthorityUtils.createAuthorityList(user.getRole().toString()));
-        this.user = user;
+    public TokenUser(String userName, String password, String roles) {
+        super(userName, password, AuthorityUtils.createAuthorityList(roles));
+        this.userName = userName;
+        this.password = password;
+        this.roles = roles;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public String getRole() {
-        return user.getRole().toString();
+    public TokenUser getUser() {
+        return this;
     }
 }
