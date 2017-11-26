@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.zen.zenmail.model.user.User;
 
 import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.Vector;
@@ -38,7 +40,7 @@ public class MessagesService {
         return result;
     }
 
-    public void sendMessage(Message msg, User user) {
+    public void sendMessage(String addressTo,String subject,String text, User user) throws MessagingException {
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -46,12 +48,21 @@ public class MessagesService {
         props.put("mail.smtp.host", MAIL_SERVER_URL);
         props.put("mail.smtp.port", MAIL_SERVER_SMTP_PORT);
 
+
+
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
                         return new PasswordAuthentication(user.getName(), user.getPassword());
                     }
                 });
+        Message msg = new MimeMessage(session);
+        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(addressTo));
+        msg.setFrom(new InternetAddress(user.getName()));
+        msg.setSubject(subject);
+        msg.setText(text);
+
+        Transport.send(msg);
     }
 
     private boolean textIsHtml = false;
