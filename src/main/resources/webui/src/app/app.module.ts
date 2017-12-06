@@ -2,7 +2,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgModule} from '@angular/core';
 import {HttpModule} from '@angular/http';
-import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 //Third Party Modules
@@ -60,6 +59,7 @@ import {CovalentSearchModule} from '@covalent/core';
 import {CovalentMenuModule} from '@covalent/core';
 import {CovalentNotificationsModule} from '@covalent/core';
 import { MessageComponent } from './pages/message/message.component';
+import {DataStorageService} from "./services/data-storege.service";
 
 
 @NgModule({
@@ -126,6 +126,7 @@ import { MessageComponent } from './pages/message/message.component';
         RegisterService,
         AppConfig,
         MessageService,
+        DataStorageService
     ],
 
     bootstrap: [AppComponent]
