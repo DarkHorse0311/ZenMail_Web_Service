@@ -18,7 +18,9 @@
                 <span md-line>Andrew Shipilo [admin@zenmail.space]</span>
 
                 <span flex></span>
-                <button md-icon-button mdTooltip="Send">
+                <button md-icon-button mdTooltip="Send"
+                        (click)="send()"
+                >
                     <md-icon>send</md-icon>
                 </button>
                 <button md-icon-button mdTooltip="Save">
@@ -37,7 +39,8 @@
             <md-input-container flex="95">
                 <input mdInput placeholder="Add recipient"
                        type="text"
-                       name="username" required>
+                       name="username" [(ngModel)]="message.to" required
+                >
             </md-input-container>
             <span flex></span>
         </div>
@@ -47,10 +50,14 @@
                 <span flex></span>
                 <input mdInput placeholder="Subject"
                        type="text"
-                       name="password" required>
+                       name="subject" [(ngModel)]="message.subject" required>
             </md-input-container>
             <span flex></span>
         </div>
-        <td-text-editor #textEditor></td-text-editor>
+        <td-text-editor #textEditor
+                        type="text"
+                        name="msg" [(ngModel)]="message.msg" required>
+
+        </td-text-editor>
     </md-dialog-content>
 </form>
