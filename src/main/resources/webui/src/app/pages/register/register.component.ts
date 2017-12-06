@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {LoginService} from '../../services/api/login.service';
 import {Router} from '@angular/router';
 import {RegisterService} from "../../services/api/register.service";
-import {Observable} from "rxjs/Observable";
-import {_dom} from "@angular/flex-layout/utils/testing/dom-tools";
 
 @Component({
     templateUrl: './register.component.html',
@@ -36,14 +34,10 @@ export class RegisterComponent implements OnInit {
             this.errMsg = 'Unacceptable symbols in name\nUse only a-z,A-Z,.-_';
             return;
         }
-        debugger;
         var fullUserName = this.model.username.concat(this.domain);
 
-        debugger;
         this.registerService.register(fullUserName, this.model.name, this.model.password)
             .subscribe(resp => {
-
-                    debugger;
                     if (resp === undefined || resp.success !== true || resp.success === undefined) {
                         this.errMsg = 'User already exist';
                         return;
@@ -72,7 +66,6 @@ export class RegisterComponent implements OnInit {
                         }
                         this.ngOnInit();
                     } else {
-                        debugger;
                         console.log('Going to landing page - ' + resp.landingPage);
                         this.loginRegisteredUser(fullUserName, this.model.password);
                     }
@@ -107,7 +100,6 @@ export class RegisterComponent implements OnInit {
     }
 
     loginRegisteredUser(userName: string, password: string) {
-        debugger;
         this.loginService.getToken(userName, password)
             .subscribe(resp => {
                     if (resp.user === undefined || resp.user.token === undefined || resp.user.token === "INVALID") {
