@@ -1,13 +1,13 @@
 package org.zen.zenmail.api.messages;
 
 
+import com.sun.mail.imap.IMAPMessage;
 import org.springframework.stereotype.Service;
 import org.zen.zenmail.model.user.User;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.io.IOException;
 import java.util.Properties;
 import java.util.Vector;
 
@@ -18,10 +18,10 @@ public class MessagesService {
     private static final String MAIL_SERVER_SMTP_PORT = "587";
     private static final String INBOX_FOLDER_NAME = "INBOX";
 
-    public Vector<String> getMessages(User user) {
+    public Vector<IMAPMessage> getMessages(User user) {
         Session session = Session.getDefaultInstance(new Properties());
         Message[] msg = {};
-        Vector<String> result = new Vector<>();
+        Vector<IMAPMessage> result = new Vector<>();
         try {
             Store store = session.getStore("imaps");
             store.connect(MAIL_SERVER_URL, MAIL_SERVER_IMAP_PORT, user.getName(), user.getPassword());
@@ -30,25 +30,21 @@ public class MessagesService {
             msg = inbox.getMessages();
             for (Message message :
                     msg) {
-                result.add(getText(message));
+                result.add((IMAPMessage) message);
             }
         } catch (MessagingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         }
         return result;
     }
 
-    public void sendMessage(String addressTo,String subject,String text, User user) throws MessagingException {
+    public void sendMessage(String addressTo, String subject, String text, User user) throws MessagingException {
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", MAIL_SERVER_URL);
         props.put("mail.smtp.port", MAIL_SERVER_SMTP_PORT);
-
-
 
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
@@ -61,48 +57,29 @@ public class MessagesService {
         msg.setFrom(new InternetAddress(user.getName()));
         msg.setSubject(subject);
         msg.setText(text);
-
         Transport.send(msg);
     }
 
-    private boolean textIsHtml = false;
-
-    private String getText(Part p) throws
-            MessagingException, IOException {
-        if (p.isMimeType("text/*")) {
-            String s = (String) p.getContent();
-            textIsHtml = p.isMimeType("text/html");
-            return s;
-        }
-
-        if (p.isMimeType("multipart/alternative")) {
-            // prefer html text over plain text
-            Multipart mp = (Multipart) p.getContent();
-            String text = null;
-            for (int i = 0; i < mp.getCount(); i++) {
-                Part bp = mp.getBodyPart(i);
-                if (bp.isMimeType("text/plain")) {
-                    if (text == null)
-                        text = getText(bp);
-                    continue;
-                } else if (bp.isMimeType("text/html")) {
-                    String s = getText(bp);
-                    if (s != null)
-                        return s;
-                } else {
-                    return getText(bp);
+    public IMAPMessage getMsgById(String id, User user) {
+        Session session = Session.getDefaultInstance(new Properties());
+        Message[] msg = {};
+        Vector<IMAPMessage> result = new Vector<>();
+        try {
+            Store store = session.getStore("imaps");
+            store.connect(MAIL_SERVER_URL, MAIL_SERVER_IMAP_PORT, user.getName(), user.getPassword());
+            Folder inbox = store.getFolder(INBOX_FOLDER_NAME);
+            inbox.open(Folder.READ_ONLY);
+            msg = inbox.getMessages();
+            for (int i = 0; i < msg.length; ++i) {
+                if (((IMAPMessage) msg[i]).getMessageID() != null && ((IMAPMessage) msg[i]).getMessageID().replace("<", "")
+                        .replace(">", "").replace(".space", "").equals(id.replace("<", "")
+                                .replace(">", ""))) {
+                    return ((IMAPMessage) msg[i]);
                 }
             }
-            return text;
-        } else if (p.isMimeType("multipart/*")) {
-            Multipart mp = (Multipart) p.getContent();
-            for (int i = 0; i < mp.getCount(); i++) {
-                String s = getText(mp.getBodyPart(i));
-                if (s != null)
-                    return s;
-            }
+        } catch (MessagingException e) {
+            e.printStackTrace();
         }
-
         return null;
     }
 }
