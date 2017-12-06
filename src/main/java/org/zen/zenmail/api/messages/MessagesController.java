@@ -24,6 +24,8 @@ import javax.mail.internet.MimeMultipart;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Vector;
 
 @RestController
@@ -65,6 +67,7 @@ public class MessagesController {
             }
             res.setOperationStatus(OperationResponse.ResponseStatusEnum.SUCCESS);
             res.setOperationMessage("ok");
+            Collections.reverse(resVector);
             res.setMsgs(resVector);
         } catch (Exception e) {
             e.printStackTrace();
