@@ -1,4 +1,8 @@
 import {Component, OnInit} from '@angular/core';
+import {inboxModel, message, MessageService} from "../../services/api/message.service";
+import {DataStorageService} from "../../services/data-storege.service";
+import {NavigationEnd, Route, Router} from "@angular/router";
+import {RootData} from "@angular/core/src/view";
 
 @Component({
     selector: 'app-inbox',
@@ -6,34 +10,51 @@ import {Component, OnInit} from '@angular/core';
     styleUrls: ['./inbox.component.scss']
 })
 export class InboxComponent implements OnInit {
-    messages: Object[] = [
-        {
-            sender: 'Friedrich Nietzsche',
-            title: 'God is dead',
-            body: 'I\'m not upset that you lied to me, I\'m upset that from now on I can\'t believe you',
-            date: 'Oct 24, 10:23',
-        }, {
-            sender: 'Jean-Paul Sartre',
-            title: 'Existence precedes essence',
-            body: 'She believed in nothing. Only her scepticism kept her from being an atheist',
-            date: 'Apr 15, 14:37',
-        }, {
-            sender: 'Martin Heidegger',
-            title: 'Destruktion',
-            body: 'Making itself intelligible is suicide for philosophy',
-            date: 'Jan 17, 16:20',
-        }, {
-            sender: 'Sergio Kostion',
-            title: 'Baguette',
-            body: 'Work for slaves -- not for Übermensch like me',
-            date: 'Nov 7, 7:06',
-        }
-    ];
+    messages: any = [{}];
 
-    constructor() {
+    constructor(private messageService: MessageService, private dataStorage: DataStorageService, private router: Router) {
+
+
     }
 
     ngOnInit() {
+        this.messages = null;
+        this.router.events.subscribe(
+            x => {
+                if (x instanceof NavigationEnd) {
+                    if (x.toString().match("message/.*")) {
+                        let a = x.urlAfterRedirects.split('/').pop();
+                        console.log(x.urlAfterRedirects.split('/').pop());
+                        let data = this.messages.find(val => val.id === a);
+                        this.dataStorage.setData(data);
+                    }
+                }
+            }
+        )
+        if (!this.dataStorage.isEmptyMessages()) {
+            this.messages = this.dataStorage.getMessages();
+            return;
+        }
+        this.messageService.getMessages()
+            .subscribe(res => {
+                    let msg = new Array();
+                    this.dataStorage.setData(res.msgs);
+                    res.msgs.forEach(item => {
+                        if (item !== null && item !== undefined) {
+                            msg.push({
+                                sender: item.from,
+                                title: item.subject,
+                                body: item.msg,
+                                date: item.time,
+                                id: item.id.replace('<', '').replace('>', '')
+                            });
+                        }
+
+                    })
+                    this.dataStorage.setMessages(msg);
+                    this.messages = msg;
+                }
+            )
     }
 
 }

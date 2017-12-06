@@ -11,6 +11,5 @@ import java.util.Vector;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class MessagesResponse extends OperationResponse {
-    private Vector<InboxMessage> msgs;
+public class SendMessageResponse extends OperationResponse {
 }

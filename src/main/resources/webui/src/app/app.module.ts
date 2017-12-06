@@ -2,7 +2,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgModule} from '@angular/core';
 import {HttpModule} from '@angular/http';
-import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 //Third Party Modules
@@ -41,6 +40,7 @@ import {AuthGuard} from './services/auth_guard.service';
 import {ApiRequestService} from './services/api/api-request.service';
 import {LoginService} from './services/api/login.service';
 import {RegisterService} from "./services/api/register.service";
+import {MessageService} from "./services/api/message.service";
 
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {CommonModule} from '@angular/common';
@@ -59,6 +59,7 @@ import {CovalentSearchModule} from '@covalent/core';
 import {CovalentMenuModule} from '@covalent/core';
 import {CovalentNotificationsModule} from '@covalent/core';
 import { MessageComponent } from './pages/message/message.component';
+import {DataStorageService} from "./services/data-storege.service";
 
 
 @NgModule({
@@ -124,6 +125,8 @@ import { MessageComponent } from './pages/message/message.component';
         LoginService,
         RegisterService,
         AppConfig,
+        MessageService,
+        DataStorageService
     ],
 
     bootstrap: [AppComponent]

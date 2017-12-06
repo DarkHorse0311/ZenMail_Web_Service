@@ -29,7 +29,7 @@ const routes: Routes = [
                 path: 'inbox', component: InboxComponent
             },
             {
-                path: 'message', component: MessageComponent
+                path: 'message/:id', component: MessageComponent
             }
         ]
     },
@@ -42,9 +42,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes, {useHash: true})],
+    imports: [RouterModule.forRoot(routes, {useHash: false})],
     exports: [RouterModule],
     declarations: [PageNotFoundComponent]
 })
 export class AppRoutingModule {
+
 }

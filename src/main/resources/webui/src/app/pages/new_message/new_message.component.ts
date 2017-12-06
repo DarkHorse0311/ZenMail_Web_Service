@@ -1,6 +1,9 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {DialogPosition, MdDialogRef} from "@angular/material";
+import {DialogPosition, MdDialogRef, MdTooltip} from "@angular/material";
 import {TdTextEditorComponent} from '@covalent/text-editor';
+import {MessageService} from "../../services/api/message.service";
+import {InstantiateExpr} from "@angular/compiler";
+import {inject} from "@angular/core/testing";
 
 
 @Component({
@@ -10,14 +13,21 @@ import {TdTextEditorComponent} from '@covalent/text-editor';
 })
 export class NewMessageComponent implements AfterViewInit {
     isFullscreen = false;
+    message: any;
 
-    constructor(public dialogRef: MdDialogRef<AfterViewInit>) {
+    constructor(public dialogRef: MdDialogRef<AfterViewInit>, private messageService: MessageService) {
+        this.message = {
+            "to": "",
+            "body": "",
+            "subjecy": ""
+        }
     }
 
     @ViewChild('textEditor') private _textEditor: TdTextEditorComponent;
 
 
     ngAfterViewInit(): void {
+
     }
 
     fullscreen(): void {
@@ -33,6 +43,14 @@ export class NewMessageComponent implements AfterViewInit {
                 left: (window.innerWidth / 2) - (window.innerWidth * 0.35) + 'px'
             });
         this.isFullscreen = false;
+    }
+
+    send(): void {
+        this.messageService.sendMsg(this.message.to, this.message.subject, this.message.msg)
+            .subscribe(res => {
+                    this.dialogRef.close()
+                }
+            );
     }
 
 }
