@@ -24,6 +24,7 @@ export class InboxComponent implements OnInit {
                 if (x instanceof NavigationEnd) {
                     if (x.toString().match("message/.*")) {
                         let a = x.urlAfterRedirects.split('/').pop();
+                        a = decodeURIComponent(decodeURIComponent(a));
                         console.log(x.urlAfterRedirects.split('/').pop());
                         let data = this.messages.find(val => val.id === a);
                         this.dataStorage.setData(data);

@@ -71,9 +71,14 @@ public class MessagesService {
             inbox.open(Folder.READ_ONLY);
             msg = inbox.getMessages();
             for (int i = 0; i < msg.length; ++i) {
-                if (((IMAPMessage) msg[i]).getMessageID() != null && ((IMAPMessage) msg[i]).getMessageID().replace("<", "")
-                        .replace(">", "").replace(".space", "").equals(id.replace("<", "")
-                                .replace(">", ""))) {
+                if (((IMAPMessage) msg[i]).getMessageID() == null) {
+                    continue;
+                }
+                String messageId = ((IMAPMessage) msg[i]).getMessageID().replace("<", "").replace(">", "");
+                messageId = messageId.split("@")[0];
+                id = id.replace("<", "").replace(">", "");
+                id = id.split("@")[0];
+                if (messageId.equals(id)){
                     return ((IMAPMessage) msg[i]);
                 }
             }

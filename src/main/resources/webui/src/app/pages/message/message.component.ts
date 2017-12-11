@@ -22,7 +22,6 @@ export class MessageComponent implements OnInit {
           "date" : "",
           "body" : "",
       }
-
     if(this.dataStorage.isEmptyOneMsg()){
         this.messageService.getMessageById(this.route.url.split('/').pop())
             .subscribe(res => {
