@@ -31,6 +31,7 @@ export class UserInfoService {
 
     //Store userinfo from session storage
     storeUserInfo(userInfoString: string) {
+        console.log(this.currentUserKey + " " + userInfoString);
         this.storage.setItem(this.currentUserKey, userInfoString);
     }
 
@@ -60,14 +61,23 @@ export class UserInfoService {
         return this.storage.getItem(this.currentUserKey) ? true : false;
     }
 
-    //Get User's Display name from session storage
-    getUserName(): string {
+    //Get User's Email
+    getUserEmail(): string {
         let userObj: UserInStorage = this.getUserInfo();
         if (userObj !== null) {
-            return 'Hello, ' + userObj.userId;
+            return userObj.email;
         }
         return "no-user";
     }
+
+    getUserName(): string {
+        let userObj: UserInStorage = this.getUserInfo();
+        if (userObj !== null) {
+            return userObj.displayName;
+        }
+        return "no-user";
+    }
+
 
     getStoredToken(): string | null {
         let userObj: UserInStorage = this.getUserInfo();

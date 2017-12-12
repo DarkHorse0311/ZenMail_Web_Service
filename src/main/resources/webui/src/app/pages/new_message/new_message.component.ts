@@ -4,6 +4,7 @@ import {TdTextEditorComponent} from '@covalent/text-editor';
 import {MessageService} from "../../services/api/message.service";
 import {InstantiateExpr} from "@angular/compiler";
 import {inject} from "@angular/core/testing";
+import {UserInfoService} from "../../services/user-info.service";
 
 
 @Component({
@@ -15,12 +16,17 @@ export class NewMessageComponent implements AfterViewInit {
     isFullscreen = false;
     message: any;
 
-    constructor(public dialogRef: MdDialogRef<AfterViewInit>, private messageService: MessageService) {
+    public userEmail: string = "";
+    public userName: string = "";
+
+    constructor(public dialogRef: MdDialogRef<AfterViewInit>, private messageService: MessageService, private userInfoService: UserInfoService) {
         this.message = {
             "to": "",
             "body": "",
             "subjecy": ""
         }
+        this.userEmail = this.userInfoService.getUserEmail();
+        this.userName = this.userInfoService.getUserName();
     }
 
     @ViewChild('textEditor') private _textEditor: TdTextEditorComponent;

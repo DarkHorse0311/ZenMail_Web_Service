@@ -5,6 +5,7 @@ import {TdMediaService} from '@covalent/core';
 import {MdDialog} from '@angular/material';
 import {NewMessageComponent} from "../new_message/new_message.component";
 import {LoginComponent} from "../login/login.component";
+import {UserInfoService} from "../../services/user-info.service";
 
 @Component({
     selector: 's-login-pg',
@@ -48,13 +49,18 @@ export class TestpageComponent implements AfterViewInit {
         }
     ];
 
+    public userEmail: string = "";
+    public userName: string = "";
+
 
     constructor(public media: TdMediaService,
                 private _iconRegistry: MdIconRegistry,
                 private _domSanitizer: DomSanitizer,
                 private _changeDetectorRef: ChangeDetectorRef,
-                public dialog: MdDialog) {
-
+                public dialog: MdDialog,
+                private userInfoService: UserInfoService) {
+        this.userEmail = this.userInfoService.getUserEmail();
+        this.userName = this.userInfoService.getUserName();
     }
 
     ngAfterViewInit(): void {

@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.zen.zenmail.model.user.User;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -43,16 +44,19 @@ public class TokenUtil {
 
         String roles = (String) (claims.get("role"));
 
-        return new TokenUser(userName, password, roles);
+        String name = (String) claims.get("name");
+
+        return new TokenUser(userName, password, roles, name);
     }
 
     public String createTokenForUser(TokenUser user) {
         return Jwts.builder()
                 .setExpiration(new Date(System.currentTimeMillis() + VALIDITY_TIME_MS))
-                .setSubject(user.getUserName())
+                .setSubject(user.getUsername())
                 .claim("username", user.getUsername())
                 .claim("pass", user.getPassword())
-                .claim("role", user.getRoles().toString())
+                .claim("role", user.getRoles())
+                .claim("name", user.getName())
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
     }

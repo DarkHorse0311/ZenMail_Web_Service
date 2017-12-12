@@ -36,7 +36,7 @@ public class TokenAuthenticationManager implements AuthenticationManager {
     private UserAuthentication processAuthentication(UsernamePasswordAuthenticationToken userAuthentication) {
         TokenUser user;
         try {
-            user = userDetailsService.loadUserByUsername(userAuthentication.getName()).getUser();
+            user = userDetailsService.loadUserByUsername(userAuthentication.getName()).getTokenUser();
         } catch (UsernameNotFoundException e) {
             throw new AuthenticationServiceException("user doesnt exist");
         }

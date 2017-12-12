@@ -72,7 +72,7 @@ export class MessageService {
             msg: body,
             subject: title,
             to: to,
-        }
+        };
         let retValue: Subject<any> = new Subject<any>();
         this.apiRequestService.post('messages', msg)
             .subscribe(jsonResp => {

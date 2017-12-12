@@ -41,7 +41,6 @@ export class HomeComponent {
             .map(_ => this.router.routerState.root)
             .map(route => {
                 while (route.firstChild) route = route.firstChild;
-                ;
                 return route;
             })
             .flatMap(route => route.data)
@@ -50,7 +49,7 @@ export class HomeComponent {
                 this.selectedHeaderItemIndex = data[0].selectedHeaderItemIndex;
                 this.selectedSubNavItemIndex = data[0].selectedSubNavItemIndex;
             });
-        this.userName = this.userInfoService.getUserName();
+        this.userName = this.userInfoService.getUserEmail();
 
     }
 

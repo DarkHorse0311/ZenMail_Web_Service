@@ -45,8 +45,8 @@ export class LoginService {
                         "landingPage": this.landingPage,
                         "user": {
                             "userId": jsonResp.item.userId,
-                            "email": jsonResp.item.emailAddress,
-                            "displayName": jsonResp.item.firstName + " " + jsonResp.item.lastNameName,
+                            "email": jsonResp.item.username,
+                            "displayName": jsonResp.item.name,
                             "token": jsonResp.item.token,
                         }
                     };

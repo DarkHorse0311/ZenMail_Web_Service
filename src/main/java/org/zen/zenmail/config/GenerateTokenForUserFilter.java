@@ -19,6 +19,7 @@ import org.zen.zenmail.identity.TokenUtil;
 import org.zen.zenmail.model.response.OperationResponse;
 import org.zen.zenmail.model.session.SessionItem;
 import org.zen.zenmail.model.session.SessionResponse;
+import org.zen.zenmail.model.user.User;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -59,14 +60,18 @@ public class GenerateTokenForUserFilter extends AbstractAuthenticationProcessing
     protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain, Authentication authToken) throws IOException, ServletException {
         SecurityContextHolder.getContext().setAuthentication(authToken);
 
-        TokenUser tokenUser = new TokenUser(authToken.getName(), (String) authToken.getCredentials(), authToken.getCredentials().toString());
+        TokenUser tokenUser = new TokenUser(authToken.getName(),
+                (String) authToken.getCredentials(),
+                authToken.getCredentials().toString(),
+                "Andrew");
+
         SessionResponse resp = new SessionResponse();
         SessionItem respItem = new SessionItem();
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String tokenString = this.tokenUtil.createTokenForUser(tokenUser);
 
         respItem.setUsername(tokenUser.getUsername());
-        respItem.setName("test");
+        respItem.setName(tokenUser.getName());
         respItem.setToken(tokenString);
 
         resp.setOperationStatus(OperationResponse.ResponseStatusEnum.SUCCESS);

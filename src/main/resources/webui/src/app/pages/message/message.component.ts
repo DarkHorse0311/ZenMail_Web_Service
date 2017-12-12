@@ -21,7 +21,7 @@ export class MessageComponent implements OnInit {
           "sender" : "",
           "date" : "",
           "body" : "",
-      }
+      };
     if(this.dataStorage.isEmptyOneMsg()){
         this.messageService.getMessageById(this.route.url.split('/').pop())
             .subscribe(res => {
@@ -34,7 +34,7 @@ export class MessageComponent implements OnInit {
                         "sender" : msg.from,
                         "date" : msg.time,
                         "body" : msg.msg,
-                    }
+                    };
                     this.dataStorage.setData(this.message);
                 }
             )
