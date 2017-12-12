@@ -29,6 +29,7 @@
     "@swimlane/ngx-charts": "^5.3.0",
     "@swimlane/ngx-datatable": "^10.2.3",
     "@webcomponents/custom-elements": "^1.0.0",
+    "angular2-letter-avatar": "^2.1.1",
     "core-js": "^2.4.1",
     "d3": "^4.9.0",
     "expr-eval": "^1.2.0",
@@ -36,6 +37,7 @@
     "highlight.js": "9.10.0",
     "rxjs": "^5.4.0",
     "showdown": "1.6.4",
+    "typings": "^2.1.1",
     "zone.js": "^0.8.5"
   },
   "devDependencies": {
