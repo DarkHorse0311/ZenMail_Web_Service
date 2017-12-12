@@ -1,11 +1,13 @@
-import {Component, AfterViewInit, ChangeDetectorRef} from '@angular/core';
+import {Component, AfterViewInit, ChangeDetectorRef, ViewChild, EventEmitter, Output} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
 import {DialogPosition, MdDialogRef, MdIconRegistry} from '@angular/material';
-import {TdMediaService} from '@covalent/core';
+import {TdMediaService, TdSearchBoxComponent} from '@covalent/core';
 import {MdDialog} from '@angular/material';
 import {NewMessageComponent} from "../new_message/new_message.component";
 import {LoginComponent} from "../login/login.component";
 import {UserInfoService} from "../../services/user-info.service";
+import {InboxComponent} from "../inbox/inbox.component";
+import {SearchService} from "../../services/api/search.service";
 
 @Component({
     selector: 's-login-pg',
@@ -58,7 +60,8 @@ export class TestpageComponent implements AfterViewInit {
                 private _domSanitizer: DomSanitizer,
                 private _changeDetectorRef: ChangeDetectorRef,
                 public dialog: MdDialog,
-                private userInfoService: UserInfoService) {
+                private userInfoService: UserInfoService,
+                private searchService : SearchService) {
         this.userEmail = this.userInfoService.getUserEmail();
         this.userName = this.userInfoService.getUserName();
     }
@@ -85,5 +88,10 @@ export class TestpageComponent implements AfterViewInit {
         });
     }
 
+
+    @ViewChild(TdSearchBoxComponent) searchBox;
+    search(): void {
+        this.searchService.search(this.searchBox.value);
+    }
 
 }

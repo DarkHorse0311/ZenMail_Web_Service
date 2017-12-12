@@ -1,10 +1,11 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {DialogPosition, MdDialogRef, MdTooltip} from "@angular/material";
+import {DialogPosition, MdDialogRef, MdSnackBar, MdTooltip} from "@angular/material";
 import {TdTextEditorComponent} from '@covalent/text-editor';
 import {MessageService} from "../../services/api/message.service";
 import {InstantiateExpr} from "@angular/compiler";
 import {inject} from "@angular/core/testing";
 import {UserInfoService} from "../../services/user-info.service";
+import {LoadingMode, LoadingType, TdLoadingService} from "@covalent/core";
 
 
 @Component({
@@ -19,12 +20,24 @@ export class NewMessageComponent implements AfterViewInit {
     public userEmail: string = "";
     public userName: string = "";
 
-    constructor(public dialogRef: MdDialogRef<AfterViewInit>, private messageService: MessageService, private userInfoService: UserInfoService) {
+    constructor(public dialogRef: MdDialogRef<AfterViewInit>,
+                private messageService: MessageService,
+                private userInfoService: UserInfoService,
+                private loadingService: TdLoadingService,
+                public snackBar: MdSnackBar)
+    {
+        loadingService.create({
+            name: 'sendEmail',
+            mode: LoadingMode.Indeterminate,
+            type: LoadingType.Linear,
+            color: 'accent',
+        });
+
         this.message = {
             "to": "",
             "body": "",
             "subjecy": ""
-        }
+        };
         this.userEmail = this.userInfoService.getUserEmail();
         this.userName = this.userInfoService.getUserName();
     }
@@ -52,9 +65,14 @@ export class NewMessageComponent implements AfterViewInit {
     }
 
     send(): void {
+        this.loadingService.register("sendEmail");
         this.messageService.sendMsg(this.message.to, this.message.subject, this.message.msg)
             .subscribe(res => {
-                    this.dialogRef.close()
+                    this.loadingService.resolve("sendEmail");
+                    this.dialogRef.close();
+                    this.snackBar.open("Message sent", "OK", {
+                        duration: 2000,
+                    });
                 }
             );
     }

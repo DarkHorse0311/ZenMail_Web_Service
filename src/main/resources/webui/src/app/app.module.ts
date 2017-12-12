@@ -60,6 +60,7 @@ import {CovalentMenuModule} from '@covalent/core';
 import {CovalentNotificationsModule} from '@covalent/core';
 import { MessageComponent } from './pages/message/message.component';
 import {DataStorageService} from "./services/data-storege.service";
+import {SearchService} from "./services/api/search.service";
 
 
 @NgModule({
@@ -126,7 +127,8 @@ import {DataStorageService} from "./services/data-storege.service";
         RegisterService,
         AppConfig,
         MessageService,
-        DataStorageService
+        DataStorageService,
+        SearchService,
     ],
 
     bootstrap: [AppComponent]

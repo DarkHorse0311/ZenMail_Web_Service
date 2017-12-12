@@ -28,7 +28,7 @@
             </div>
         </span>
         <span class="md-display-2">{{day}}</span>
-        <td-search-box #searchBox class="pull-top-sm pull-bottom-sm" placeholder="Search here" flex>
+        <td-search-box #searchBox name="searchBox" class="pull-top-sm pull-bottom-sm" placeholder="Search here" (search)="search()" flex>
         </td-search-box>
         <button md-icon-button [mdMenuTriggerFor]="notificationsMenu">
             <td-notification-count color="accent" [notifications]="4">
@@ -40,27 +40,15 @@
                 <div td-menu-header class="md-subhead">Templates</div>
                 <md-nav-list dense>
                     <a md-list-item>
-                        <md-icon md-list-avatar>system_update_alt</md-icon>
-                        <h4 md-line><span class="text-wrap">Landing Page</span></h4>
-                        <p md-line>a landing page template</p>
+                        <md-icon md-list-avatar>email</md-icon>
+                        <h4 md-line><span class="text-wrap">New messages</span></h4>
+                        <p md-line>You have unread messages</p>
                     </a>
                     <md-divider></md-divider>
                     <a md-list-item>
                         <md-icon md-list-avatar>dashboard</md-icon>
-                        <h4 md-line><span class="text-wrap">Dashboard</span></h4>
-                        <p md-line>an ngx-charts dashboard template</p>
-                    </a>
-                    <md-divider></md-divider>
-                    <a md-list-item>
-                        <md-icon md-list-avatar>email</md-icon>
-                        <h4 md-line><span class="text-wrap">Email App</span></h4>
-                        <p md-line>an email app template</p>
-                    </a>
-                    <md-divider></md-divider>
-                    <a md-list-item>
-                        <md-icon md-list-avatar>view_array</md-icon>
-                        <h4 md-line><span class="text-wrap">IDE Editor</span></h4>
-                        <p md-line>an IDE text editor app template</p>
+                        <h4 md-line><span class="text-wrap">Github</span></h4>
+                        <p md-line>Check our github</p>
                     </a>
                 </md-nav-list>
                 <a md-button color="accent" td-menu-footer

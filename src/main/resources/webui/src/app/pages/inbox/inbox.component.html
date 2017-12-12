@@ -16,15 +16,19 @@
     </md-card-header>
     <md-divider></md-divider>
     <md-nav-list dense layout-fill flex>
-
         <ng-template let-item let-last="last" ngFor [ngForOf]="messages">
-            <md-list-item>
+
+            <md-list-item *ngIf="item.visible">
+
                 <md-checkbox color="primary" class="checkbox pad-right-xs"></md-checkbox>
                 <md-icon class="tc-grey-500 pad-right-sm">star_border</md-icon>
-                <a [routerLink]="'/home/message/'+item.id" flex layout="row">
-                    <span align="start" flex="20">{{item.sender}}</span>
-                    <span class="md-caption">{{item.title}}<span class="tc-grey-600"> — {{item.body.substr(0,10) || ''}}</span></span>
-                    <span class="md-caption" flex align="end">{{item.date}}</span>
+                <a [routerLink]="'/home/message/' + item.id" flex layout="row">
+                    <div>
+                        <span align="start" flex="20">{{item.sender}}</span>
+                        <span class="md-caption">{{item.title}}<span
+                                class="tc-grey-600"> — {{item.body.substr(0,10) || ''}}</span></span>
+                        <span class="md-caption" flex align="end">{{item.date}}</span>
+                    </div>
                 </a>
             </md-list-item>
         </ng-template>
