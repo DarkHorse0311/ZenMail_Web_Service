@@ -16,6 +16,15 @@ import {SearchService} from "../../services/api/search.service";
 })
 export class TestpageComponent implements AfterViewInit {
 
+    public userAvatar: any = {
+        size: 40, // default size is 100
+        fontColor: '#FFFFFF',
+        border: "2px solid #d3d3d3",
+        isSquare: false, // if it is true then letter avatar will be in square defaule value is false
+        text: "", //
+        fixedColor:true //if you enable true then letter will have same color for ever default value is false
+    };
+
     sidenavopened = true;
     weekday = new Date().toLocaleString('en-US', {weekday: 'long'});
     year = new Date().toLocaleString('en-US', {year: 'numeric'});
@@ -64,6 +73,7 @@ export class TestpageComponent implements AfterViewInit {
                 private searchService : SearchService) {
         this.userEmail = this.userInfoService.getUserEmail();
         this.userName = this.userInfoService.getUserName();
+        this.userAvatar.text = this.userEmail;
     }
 
     ngAfterViewInit(): void {

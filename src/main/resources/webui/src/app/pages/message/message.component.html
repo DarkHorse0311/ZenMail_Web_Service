@@ -30,8 +30,7 @@
   </md-card-header>
   <md-divider></md-divider>
   <md-card-header>
-    <img md-card-avatar
-         src="http://cdn8.openculture.com/wp-content/uploads/2013/09/James_Joyce_by_Alex_Ehrenzweig_1915_restored.jpg"/>
+    <avatar md-card-avatar align="center" [avatardata]="senderAvatar"></avatar>
     <md-card-title>From: <b>{{message.sender}}</b></md-card-title>
     <md-card-subtitle>{{message.date}}</md-card-subtitle>
     <span flex></span>

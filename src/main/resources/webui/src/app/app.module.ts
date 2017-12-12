@@ -7,6 +7,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 //Third Party Modules
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
+import {LetterAvatarDirective} from 'angular2-letter-avatar/directives/letter-avatar.directive';
 
 import {CovalentLayoutModule, CovalentStepsModule /*, any other modules */} from '@covalent/core';
 // (optional) Additional Covalent Modules imports
@@ -116,7 +117,8 @@ import {SearchService} from "./services/api/search.service";
         RegisterComponent,
         NewMessageComponent,
         InboxComponent,
-        MessageComponent
+        MessageComponent,
+        LetterAvatarDirective,
     ],
 
     providers: [
@@ -130,6 +132,7 @@ import {SearchService} from "./services/api/search.service";
         DataStorageService,
         SearchService,
     ],
+
 
     bootstrap: [AppComponent]
 })

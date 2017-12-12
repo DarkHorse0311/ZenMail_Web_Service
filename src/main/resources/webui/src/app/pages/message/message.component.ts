@@ -12,6 +12,16 @@ import {Location} from '@angular/common';
 export class MessageComponent implements OnInit {
     message: any;
 
+    public senderAvatar: any = {
+        size: 40, // default size is 100
+        fontColor: '#FFFFFF',
+        border: "2px solid #d3d3d3",
+        isSquare: false, // if it is true then letter avatar will be in square defaule value is false
+        text: "", //
+        fixedColor:true //if you enable true then letter will have same color for ever default value is false
+    };
+
+
     constructor(private messageService: MessageService,
                 private dataStorage: DataStorageService,
                 private  route: Router,
@@ -44,9 +54,10 @@ export class MessageComponent implements OnInit {
                     }
                 )
         } else {
-
             this.message = this.dataStorage.getData();
         }
+
+        this.senderAvatar.text = this.message.sender;
     }
     back() : void {
         this.location.back();
