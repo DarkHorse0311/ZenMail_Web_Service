@@ -91,18 +91,4 @@ public class Hash {
         BigInteger bigInteger = new BigInteger(stringBuilder.toString(), 2);
         return bigInteger.toString(16);
     }
-
-    public static String getSaltFromDB(String password){
-        StringBuilder salt = new StringBuilder("");
-        if(password != null){
-            String hashPassword = password;
-            for(int i = 52; i < hashPassword.length(); ++i){
-                salt.append(hashPassword.charAt(i));
-            }
-        }
-        return Base64.getDecoder().decode(salt.toString()).toString();
-    }
-
-
-
 }

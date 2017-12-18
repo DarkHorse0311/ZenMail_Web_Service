@@ -24,18 +24,6 @@ public class UserService {
     @Autowired
     private UserAclRepository userAclRepo;
 
-    public String getSaltFromDB(String username){
-        StringBuilder salt = new StringBuilder("");
-        if(userRepo.findOneByUsername(username).isPresent()){
-            User user = userRepo.findOneByUsername(username).get();
-            String hashPassword = user.getPassword();
-            for(int i = 43; i < hashPassword.length(); ++i){
-                salt.append(hashPassword.charAt(i));
-            }
-        }
-        return Base64.getDecoder().decode(salt.toString()).toString();
-    }
-
     public String getLoggedInUserId() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth == null) {
