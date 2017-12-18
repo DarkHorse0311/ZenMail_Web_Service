@@ -18,7 +18,7 @@ export class MessageComponent implements OnInit {
         border: "2px solid #d3d3d3",
         isSquare: false, // if it is true then letter avatar will be in square defaule value is false
         text: "", //
-        fixedColor:true //if you enable true then letter will have same color for ever default value is false
+        fixedColor: true //if you enable true then letter will have same color for ever default value is false
     };
 
 
@@ -59,7 +59,8 @@ export class MessageComponent implements OnInit {
 
         this.senderAvatar.text = this.message.sender;
     }
-    back() : void {
+
+    back(): void {
         this.location.back();
     }
 
