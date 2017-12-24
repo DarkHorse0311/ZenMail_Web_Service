@@ -22,13 +22,12 @@
 
                 <md-checkbox color="primary" class="checkbox pad-right-xs"></md-checkbox>
                 <md-icon class="tc-grey-500 pad-right-sm">star_border</md-icon>
+
                 <a [routerLink]="'/home/message/' + item.id" flex layout="row">
-                    <div>
-                        <span align="start" flex="20">{{item.sender}}</span>
-                        <span class="md-caption">{{item.title}}<span
-                                class="tc-grey-600"> — {{item.body.substr(0,10) || ''}}</span></span>
-                        <span class="md-caption" flex align="end">{{item.date}}</span>
-                    </div>
+                    <span align="start" flex="20">{{item.sender.substr(0,24)}}</span>
+                    <span class="md-caption" flex="30"  align="center">{{item.title}}<span class="tc-grey-600" flex="30" align="center"> — {{item.body.substr(0,35) || ''}}</span></span>
+                    <span flex></span>
+                    <span class="md-caption" flex="20" align="end">{{item.date}}</span>
                 </a>
             </md-list-item>
         </ng-template>
