@@ -1,20 +1,24 @@
 package org.zen.zenmail.api.user;
 
 import com.google.common.base.Strings;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.zen.zenmail.model.response.OperationResponse;
 import org.zen.zenmail.model.user.User;
 import org.zen.zenmail.model.user.UserResponse;
-
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
+@Api(tags = {"Authentication"})
 public class UserController {
 
     @Autowired
     private UserService userService;
 
+
+    @ApiOperation(value = "Gets current user information", response = UserResponse.class)
     @RequestMapping(value = "/user", method = RequestMethod.GET, produces = {"application/json"})
     public UserResponse getUserInformation(@RequestParam(value = "name", required = false) String userIdParam, HttpServletRequest req) {
 
@@ -46,6 +50,7 @@ public class UserController {
         return resp;
     }
 
+    @ApiOperation(value = "Add new user", response = OperationResponse.class)
     @RequestMapping(value = "/user", method = RequestMethod.POST, produces = {"application/json"})
     public OperationResponse addNewUser(@RequestBody User user, HttpServletRequest req) {
         boolean userAddSuccess = userService.addNewUser(user);

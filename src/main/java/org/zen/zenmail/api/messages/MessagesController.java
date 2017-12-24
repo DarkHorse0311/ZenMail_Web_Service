@@ -2,6 +2,8 @@ package org.zen.zenmail.api.messages;
 
 
 import com.sun.mail.imap.IMAPMessage;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,6 +17,7 @@ import org.zen.zenmail.model.messages.InboxMessage;
 import org.zen.zenmail.model.messages.SendMessageResponse;
 import org.zen.zenmail.model.response.OperationResponse;
 import org.zen.zenmail.model.user.User;
+import org.zen.zenmail.model.user.UserResponse;
 
 import javax.mail.BodyPart;
 import javax.mail.Message;
@@ -29,11 +32,13 @@ import java.util.Collections;
 import java.util.Vector;
 
 @RestController
+@Api(tags = {"Authentication"})
 public class MessagesController {
 
     @Autowired
     private MessagesService messagesService;
 
+    @ApiOperation(value = "Gets current user information", response = MessagesResponse.class)
     @RequestMapping(value = "/messages/inbox", method = RequestMethod.GET, produces = {"application/json"})
     public MessagesResponse getUserInformation(HttpServletRequest req, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -78,6 +83,7 @@ public class MessagesController {
         return res;
     }
 
+    @ApiOperation(value = "Send message", response = SendMessageResponse.class)
     @RequestMapping(value = "/messages", method = RequestMethod.POST, produces = {"application/json"})
     public SendMessageResponse sendMessage(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -120,8 +126,9 @@ public class MessagesController {
         return returnValue;
     }
 
+    @ApiOperation(value = "Gets current user information", response = MessagesResponse.class)
     @RequestMapping(value = "/messages/inbox/{id}", method = RequestMethod.GET, produces = {"application/json"})
-    public MessagesResponse getUserInformation(@PathVariable String id, HttpServletRequest req, HttpServletResponse response) {
+    public MessagesResponse getUserInformation(@RequestParam(value = "id", required = false)@PathVariable String id, HttpServletRequest req, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!AuthHelper.isLoggined(auth)) {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
